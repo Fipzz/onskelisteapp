@@ -10,6 +10,9 @@ coverage
 # Ignore Apple macOS Desktop Services Store
 .DS_Store
 
+# Minimized files (found in the wishlist-frontend)
+theme-app-extension/assets/*.min.js
+
 # Logs
 logs
 *.log
