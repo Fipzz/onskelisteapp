@@ -3,6 +3,7 @@ import enTranslations from "@shopify/polaris/locales/en.json";
 import { AppProvider, Button } from "@shopify/polaris";
 import React from "react";
 import TabsExample from "./components/TabsExample.tsx";
+import art from "./media/test.jpg";
 
 export default function Index() {
   return (
@@ -10,7 +11,7 @@ export default function Index() {
       <TabsExample />
 
       <Heading>
-        Shopify app with Node and React{" "}
+        Landingpage for onskelisteapp{" "}
         <span role="img" aria-label="tada emoji">
           🎉
         </span>
@@ -18,6 +19,8 @@ export default function Index() {
       <AppProvider i18n={enTranslations}>
         <Button onClick={() => alert("Button clicked!")}>Example button</Button>
       </AppProvider>
+
+      <img src="test.jpg" alt="pic" />
     </Page>
   );
 }

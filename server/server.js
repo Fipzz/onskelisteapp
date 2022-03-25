@@ -47,7 +47,7 @@ app.prepare().then(async () => {
         const { shop, accessToken, scope } = ctx.state.shopify;
         const host = ctx.query.host;
         ACTIVE_SHOPIFY_SHOPS[shop] = scope;
-
+        console.log("here3", ctx.state.shopify);
         const responses = await Shopify.Webhooks.Registry.register({
           shop,
           accessToken,
@@ -71,6 +71,7 @@ app.prepare().then(async () => {
     await handle(ctx.req, ctx.res);
     ctx.respond = false;
     ctx.res.statusCode = 200;
+    console.log("here2", ctx.state.shopify);
   };
 
   router.post("/webhooks", async (ctx) => {
@@ -92,6 +93,7 @@ app.prepare().then(async () => {
 
   router.get("(/_next/static/.*)", handleRequest); // Static content is clear
   router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
+  router.get("/Dashboard", handleRequest);
   router.get("(.*)", async (ctx) => {
     const shop = ctx.query.shop;
 
