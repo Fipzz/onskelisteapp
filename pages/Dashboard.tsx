@@ -4,7 +4,8 @@ import { AppProvider, Button } from "@shopify/polaris";
 import React from "react";
 import TabsExample from "./components/TabsExample";
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  console.log(props);
   return (
     <Page>
       <Heading>Dashboard</Heading>

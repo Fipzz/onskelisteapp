@@ -1,10 +1,18 @@
-import React, { useCallback, useState } from "react";
+import React, { FunctionComponent, useCallback, useState } from "react";
 import { ChoiceList, Card, Icon } from "@shopify/polaris";
 
-const ItemSelector = () => {
-  const [selected, setSelected] = useState(["hidden"]);
+type PropsType = {
+  UpdateMerchantButtonIcon: Function;
+};
 
-  const handleChange = useCallback((value) => setSelected(value), []);
+const ItemSelector: FunctionComponent<PropsType> = ({
+  UpdateMerchantButtonIcon,
+}) => {
+  const [selected, setSelected] = useState([""]);
+  const handleChange = useCallback((value) => {
+    setSelected(value);
+    UpdateMerchantButtonIcon(value[0]);
+  }, []);
 
   return (
     <Card>
