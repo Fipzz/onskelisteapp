@@ -1,14 +1,22 @@
-import React, { FunctionComponent, useCallback, useState } from "react";
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { ChoiceList, Card, Icon } from "@shopify/polaris";
 
 type PropsType = {
+  initValue: string;
   UpdateMerchantButtonIcon: Function;
 };
 
-const ItemSelector: FunctionComponent<PropsType> = ({
+const buttonSettings: FunctionComponent<PropsType> = ({
   UpdateMerchantButtonIcon,
+  initValue,
 }) => {
-  const [selected, setSelected] = useState([""]);
+  const [selected, setSelected] = useState([initValue]);
+
   const handleChange = useCallback((value) => {
     setSelected(value);
     UpdateMerchantButtonIcon(value[0]);
@@ -39,4 +47,4 @@ const ItemSelector: FunctionComponent<PropsType> = ({
   );
 };
 
-export default ItemSelector;
+export default buttonSettings;

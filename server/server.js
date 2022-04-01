@@ -6,6 +6,9 @@ import Shopify, { ApiVersion, DataType } from "@shopify/shopify-api";
 import Koa from "koa";
 import next from "next";
 import Router from "koa-router";
+import restAPI, { createMerchant } from "./../pages/actions/restAPI.js";
+import standardSettings from "./../pages/assets/json/standardSettings.json";
+
 const cors = require("cors");
 require("dotenv").config();
 
@@ -72,6 +75,12 @@ app.prepare().then(async () => {
         const host = ctx.query.host;
         ACTIVE_SHOPIFY_SHOPS[shop] = scope;
 
+        let id = ctx.state.shopify.id.split("_");
+
+        createMerchant(id[1], shop, standardSettings).then((res) => {
+          console.log(res);
+        });
+
         const response = await Shopify.Webhooks.Registry.register({
           shop,
           accessToken,
@@ -131,11 +140,14 @@ app.prepare().then(async () => {
 
   router.get("/shop", async (ctx) => {
     const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res);
+    console.log("---------------------->", session);
     // Create a new client for the specified shop.
     const client = new Shopify.Clients.Rest(session.shop, session.accessToken);
     const data = await client.get({
       path: "shop",
     });
+    let id = session.id.split("_");
+    data.id = id[1];
 
     ctx.body = data;
     ctx.status = 200;
@@ -174,12 +186,10 @@ app.prepare().then(async () => {
 
   router.get("(.*)", async (ctx) => {
     const shop = ctx.query.shop;
-
     // This shop hasn't been seen yet, go through OAuth to create a session
     if (ACTIVE_SHOPIFY_SHOPS[shop] === undefined) {
       ctx.redirect(`/auth?shop=${shop}`);
     } else {
-      //HERHE
       await handleRequest(ctx);
     }
   });

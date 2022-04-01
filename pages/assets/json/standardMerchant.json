@@ -1,4 +1,6 @@
 {
+  "merchantID": "",
+  "websiteURL": "",
   "settings": {
     "button": {
       "color": "#000",

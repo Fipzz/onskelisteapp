@@ -11,7 +11,7 @@ const cryption = new Cryptr(process.env.ENCRYPTION_STRING);
 const storeCallback = async (session) => {
   const result = await SessionModel.findOne({ id: session.id });
 
-  console.log("Went in here and stored: ", session);
+  //console.log("Went in here and stored: ", session);
 
   if (result === null) {
     await SessionModel.create({
