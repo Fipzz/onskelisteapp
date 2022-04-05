@@ -8,16 +8,46 @@
     {%- endfor -%}
 ]
 {%- endcapture -%}
-    
-    {% comment %} {%- unless forloop.last -%}{%- endunless -%} {% endcomment %}
-    {% comment %} "variantID": {%- if product.available -%}{{ product.selected_or_first_available_variant }}{%- else -%}"null"{%- endif -%} {% endcomment %}
-<div class="wishlist-data" data-product-params='{{ productVars }}'></div>
+
+{% capture buttonSettings %}
+{
+    "useIcon": {%- if block.settings.icon_image != nil or block.settings.icon_svg != empty -%}true{%- else -%}false{%- endif -%},
+    "iconActiveUrl": {%- if block.settings.icon_svg == "" -%}"{{ block.settings.icon_image | image_url }}"{%- else -%}"{{ block.settings.icon_svg }}"{%- endif -%},
+    "iconUnactiveUrl": {%- if block.settings.icon_svg_active == "" -%}"{{ block.settings.icon_image_active | image_url }}"{%- else -%}"{{ block.settings.icon_svg_active }}"{%- endif -%}
+}
+{% endcapture %}
+
+<div class="wishlist-data" data-product-params='{{ productVars }}' data-button-settings='{{ buttonSettings }}'></div>
 
 {% schema %}
     {
         "name": "Collection buttons",
         "target": "section",
         "javascript": "app.collection.min.js",
-        "templates": ["collection"]
+        "templates": ["collection"],
+        "settings": [
+            {
+                "type": "text",
+                "id": "icon_svg",
+                "label": "Icon as SVG",
+                "info": "Copy and paste url from SVG-file in /admin/settings/files"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_image",
+                "label": "Icon image"
+            },
+            {
+                "type": "text",
+                "id": "icon_svg_active",
+                "label": "Active icon as SVG",
+                "info": "Copy and paste url from SVG-file in /admin/settings/files"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_image_active",
+                "label": "Active icon image"
+            }
+        ]
     }
 {% endschema %}
