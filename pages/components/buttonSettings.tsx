@@ -13,11 +13,9 @@ import {
   TextField,
   Checkbox,
 } from "@shopify/polaris";
-import { StarFilledMinor } from "@shopify/polaris-icons";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StarIcon from "@mui/icons-material/Star";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import * as colorConverter from "../functions/colorConverter.js";
 import { hsbToHex, rgbToHsb, RGBColor } from "@shopify/polaris";
 
 type PropsType = {
@@ -164,8 +162,7 @@ const buttonSettings: FunctionComponent<PropsType> = ({
           </div>
         </Card>
 
-        <Card>
-          Icon color
+        <Card title="Icon color">
           {buttonIconColorPicker()}
           {newButtonColor}
           {<br />}
@@ -175,22 +172,20 @@ const buttonSettings: FunctionComponent<PropsType> = ({
             {newButtonUnactiveURL} */}
         </Card>
 
-        <Card>
-          Hover color
+        <Card title="Hover color">
           {buttonHoverColorPicker()}
           {newButtonHoverColor}
         </Card>
-        <Card>
-          Text color
+        <Card title="Text color">
           {buttonTextColorPicker()}
           {newButtonTextColor}
         </Card>
       </div>
-      <div style={{ padding: "1em" }}>
+      <div style={{ padding: "1em", maxWidth: "30%" }}>
         <Card>
           <FormLayout>
             <ChoiceList
-              title="Add to wishlist button: "
+              title="Wishlist button as text?: "
               choices={[
                 { label: "Use Icon", value: "no" },
                 { label: "Use Text", value: "yes" },

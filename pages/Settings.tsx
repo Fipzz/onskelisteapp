@@ -6,6 +6,7 @@ import { getSessionToken } from "@shopify/app-bridge-utils";
 import standardMerchant from "./assets/json/standardMerchant.json";
 import { Button } from "@shopify/polaris";
 import * as restAPI from "./actions/restAPI";
+import ModalSettings from "./components/modalSettings";
 
 export default function Settings(props) {
   const [loadingSettings, setLoadingSettings] = useState(true);
@@ -15,7 +16,7 @@ export default function Settings(props) {
   const [themeID, setThemeID] = useState();
   const [merchantID, setMerchantID] = useState();
 
-  //New variables : Settings
+  //New variables : Wishlist Button
   const [newButtonColor, setNewButtonColor] = useState("");
   const [newButtonHoverColor, setNewButtonHoverColor] = useState("");
   const [newButtonText, setNewButtonText] = useState("");
@@ -27,6 +28,26 @@ export default function Settings(props) {
   const [newButtonUnactiveURL, setNewButtonUnactiveURL] = useState("");
 
   //New variables : Modal
+  const [newModalBackgroundColor, setNewModalBackgroundColor] = useState("");
+
+  //New variables : Modal - Toggle
+  const [newModalToggleColor, setNewModalToggleColor] = useState("");
+  const [newModalToggleIconURL, setNewModalToggleIconURL] = useState("");
+  const [newModalToggleIsIcon, setNewModalToggleIsIcon] = useState("");
+  const [newModalToggleHoverColor, setNewModalToggleHoverColor] = useState("");
+  const [newModalToggleTextColor, setNewModalToggleTextColor] = useState("");
+
+  //New variables : Modal - Add to Cart
+  const [newModalCartButtonColor, setNewModalCartButtonColor] = useState("");
+  const [
+    newModalCartButtonHoverColor,
+    setNewModalCartButtonHoverColor,
+  ] = useState("");
+  const [newModalCartButtonText, setNewModalCartButtonText] = useState("");
+  const [
+    newModalCartButtonTextColor,
+    setNewModalCartButtonTextColor,
+  ] = useState("");
 
   //Loads current settings for merchant
   function initMerchant() {
@@ -102,8 +123,31 @@ export default function Settings(props) {
         newButtonUnactiveURL={newButtonUnactiveURL}
         setNewButtonUnactiveURL={setNewButtonUnactiveURL}
       />
-
-      <Button onClick={handleSaveSettings}>Save settings</Button>
+      <ModalSettings
+        newModalToggleColor={newModalToggleColor}
+        setNewModalToggleColor={setNewModalToggleColor}
+        newModalToggleIconURL={newModalToggleIconURL}
+        setNewModalToggleIconURL={setNewModalToggleIconURL}
+        newModalToggleIsIcon={newModalToggleIsIcon}
+        setNewModalToggleIsIcon={setNewModalToggleIsIcon}
+        newModalToggleHoverColor={newModalToggleHoverColor}
+        setNewModalToggleHoverColor={setNewModalToggleHoverColor}
+        newModalToggleTextColor={newModalToggleTextColor}
+        setNewModalToggleTextColor={setNewModalToggleTextColor}
+        newModalCartButtonColor={newModalCartButtonColor}
+        setNewModalCartButtonColor={setNewModalCartButtonColor}
+        newModalCartButtonHoverColor={newModalCartButtonHoverColor}
+        setNewModalCartButtonHoverColor={setNewModalCartButtonHoverColor}
+        newModalCartButtonText={newModalCartButtonText}
+        setNewModalCartButtonText={setNewModalCartButtonText}
+        newModalCartButtonTextColor={newModalCartButtonTextColor}
+        setNewModalCartButtonTextColor={setNewModalCartButtonTextColor}
+        newModalBackgroundColor={newModalBackgroundColor}
+        setNewModalBackgroundColor={setNewModalBackgroundColor}
+      />
+      <div style={{ padding: "1em" }}>
+        <Button onClick={handleSaveSettings}>Save settings</Button>
+      </div>
     </div>
   );
 }
