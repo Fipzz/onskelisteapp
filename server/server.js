@@ -140,7 +140,6 @@ app.prepare().then(async () => {
 
   router.get("/shop", async (ctx) => {
     const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res);
-    console.log("---------------------->", session);
     // Create a new client for the specified shop.
     const client = new Shopify.Clients.Rest(session.shop, session.accessToken);
     const data = await client.get({
@@ -163,20 +162,32 @@ app.prepare().then(async () => {
         session.accessToken
     );
 
-    console.log("TEST: ", process.env.NODE_ENV);
+    console.log("TEST: ", process.env.NODE_ENV); // WORKS
 
-    if (process.env.NODE_ENV) {
-      console.log("1");
-    } else {
-      console.log("2");
-    }
-
+    //Get list of themes for shop
     const client = new Shopify.Clients.Rest(session.shop, session.accessToken);
     const data = await client.get({
       path: "themes",
     });
+    //Find main theme for shop
+    let themeID;
 
-    ctx.body = data;
+    data.body.themes.forEach((theme) => {
+      if ((theme.role = "main")) {
+        themeID = theme.id;
+      }
+    });
+
+    const ress = await client.get({
+      path: "themes/" + themeID + "/assets",
+      query: { "asset%5Bkey%5D": "assets/ajax-loader.gif" },
+    });
+
+    const result = await client.get({
+      path: "themes/" + themeID + "/assets",
+    });
+    console.log(ress);
+    ctx.body = ress;
     ctx.status = 200;
   });
 
