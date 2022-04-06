@@ -1,0 +1,30 @@
+{
+  "settings": {
+    "button": {
+      "color": "#000",
+      "hovorColor": "#000",
+      "txt": "Save",
+      "txtColor": "#000",
+      "isIcon": true,
+      "isCustom": false,
+      "stdIcon": "heart",
+      "iconUnactiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423",
+      "iconActiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-filled.svg?v=1648208423"
+    },
+    "modal": {
+      "bgColor": "#000",
+      "addToCartButton": {
+        "color": "#000",
+        "hoverColor": "#000",
+        "txtColor": "#000",
+        "txt": "Add to cart"
+      },
+      "toggleModalButton": {
+        "color": "#000",
+        "hoverColor": "#000",
+        "txtColor": "#000",
+        "txt": "Open wishlist"
+      }
+    }
+  }
+}
