@@ -23,7 +23,9 @@
         "color": "#000",
         "hoverColor": "#000",
         "txtColor": "#000",
-        "txt": "Open wishlist"
+        "txt": "Open wishlist",
+        "iconUrl": "please update",
+        "isIcon": true
       }
     }
   }
