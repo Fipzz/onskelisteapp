@@ -123,8 +123,8 @@ export default function Settings(props) {
 
     merchantSettings.settings.modal.addToCartButton.color = newModalCartButtonColor;
     merchantSettings.settings.modal.addToCartButton.hoverColor = newModalCartButtonHoverColor;
-    merchantSettings.settings.modal.addToCartButton.txtColor = newModalCartButtonText;
-    merchantSettings.settings.modal.addToCartButton.txt = newModalCartButtonTextColor;
+    merchantSettings.settings.modal.addToCartButton.txtColor = newModalCartButtonTextColor;
+    merchantSettings.settings.modal.addToCartButton.txt = newModalCartButtonText;
 
     // merchantSettings.settings.button.iconActiveUrl
     // merchantSettings.settings.button.iconUnactiveUrl
