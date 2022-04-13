@@ -1,8 +1,6 @@
 import React, { useCallback, useState } from "react";
 import ButtonSettings from "./components/buttonSettings";
 import { useEffect } from "react";
-import { useAppBridge } from "@shopify/app-bridge-react";
-import { getSessionToken } from "@shopify/app-bridge-utils";
 import standardMerchant from "./assets/json/standardMerchant.json";
 import { Button } from "@shopify/polaris";
 import * as restAPI from "./actions/restAPI";
@@ -10,10 +8,11 @@ import ModalSettings from "./components/modalSettings";
 
 export default function Settings(props) {
   const [loadingSettings, setLoadingSettings] = useState(true);
+  // const API_URL = "wishlist-api-shopify.herokuapp.com";
   const API_URL = "wishlist-api-shopify.herokuapp.com";
   const [merchantSettings, setMerchantSettings] = useState(standardMerchant);
   const [shop, setShop] = useState();
-  const [themeID, setThemeID] = useState();
+  const [token, setToken] = useState();
   const [merchantID, setMerchantID] = useState();
 
   //New variables : Wishlist Button
@@ -55,6 +54,8 @@ export default function Settings(props) {
     props.axios_instance.get("/shop").then((res) => {
       setShop(res.data.body.shop.domain);
       setMerchantID(res.data.id);
+      setToken(res.data.token);
+      console.log("token to update settings - ", res.data.token);
       console.log("Merchant fetch shop: ", res);
       restAPI
         .getMerchantSettings(API_URL, res.data.body.shop.domain)
@@ -63,15 +64,15 @@ export default function Settings(props) {
 
           //Button settings
           setMerchantSettings(res);
-          setNewButtonColor(res.settings.button.color);
-          setNewButtonHoverColor(res.settings.button.hovorColor);
-          setNewButtonText(res.settings.button.txt);
-          setNewButtonTextColor(res.settings.button.txtColor);
-          setNewButtonIsIcon(res.settings.button.isIcon);
-          setNewButtonIsCustom(res.settings.button.isCustom);
-          setNewButtonStdIcon(res.settings.button.stdIcon);
-          setNewButtonActiveURL(res.settings.button.iconUnactiveUrl);
-          setNewButtonUnactiveURL(res.settings.button.iconActiveUrl);
+          setNewButtonColor(res.settings.collection.color);
+          setNewButtonHoverColor(res.settings.collection.hoverColor);
+          setNewButtonText(res.settings.collection.txt);
+          setNewButtonTextColor(res.settings.collection.txtColor);
+          setNewButtonIsIcon(res.settings.collection.isIcon);
+          setNewButtonIsCustom(res.settings.collection.isCustom);
+          setNewButtonStdIcon(res.settings.collection.stdIcon);
+          setNewButtonActiveURL(res.settings.collection.iconUnactiveUrl);
+          setNewButtonUnactiveURL(res.settings.collection.iconActiveUrl);
 
           //Modal settings
           setNewModalBackgroundColor(res.settings.modal.bgColor);
@@ -93,7 +94,7 @@ export default function Settings(props) {
           );
           setNewModalCartButtonText(res.settings.modal.addToCartButton.txt);
           setNewModalCartButtonTextColor(
-            res.settings.modal.addToCartButton.txt
+            res.settings.modal.addToCartButton.txtColor
           );
         });
     });
@@ -104,15 +105,20 @@ export default function Settings(props) {
   }, []);
 
   async function saveSettings() {
-    //Set new button settings object
+    //Set security settings
     merchantSettings.merchantID = merchantID;
-    merchantSettings.settings.button.color = newButtonColor;
-    merchantSettings.settings.button.hovorColor = newButtonHoverColor;
-    merchantSettings.settings.button.txt = newButtonText;
-    merchantSettings.settings.button.txtColor = newButtonTextColor;
-    merchantSettings.settings.button.isIcon = newButtonIsIcon;
-    merchantSettings.settings.button.isCustom = newButtonIsCustom;
-    merchantSettings.settings.button.stdIcon = newButtonStdIcon;
+    merchantSettings.websiteURL = shop;
+    merchantSettings.token = token;
+
+    //Set collection button to new settings
+    merchantSettings.settings.collection.color = newButtonColor;
+    merchantSettings.settings.collection.hoverColor = newButtonHoverColor;
+    merchantSettings.settings.collection.txt = newButtonText;
+    merchantSettings.settings.collection.txtColor = newButtonTextColor;
+    merchantSettings.settings.collection.isIcon = newButtonIsIcon;
+    merchantSettings.settings.collection.isCustom = newButtonIsCustom;
+    merchantSettings.settings.collection.stdIcon = newButtonStdIcon;
+    //Set modal toggle button to new settings
     merchantSettings.settings.modal.bgColor = newModalBackgroundColor;
     merchantSettings.settings.modal.toggleModalButton.color = newModalToggleColor;
     merchantSettings.settings.modal.toggleModalButton.hoverColor = newModalToggleHoverColor;
@@ -120,7 +126,7 @@ export default function Settings(props) {
     merchantSettings.settings.modal.toggleModalButton.txt = newModalToggleText;
     merchantSettings.settings.modal.toggleModalButton.iconUrl = newModalToggleIconURL;
     merchantSettings.settings.modal.toggleModalButton.isIcon = newModalToggleIsIcon;
-
+    //Set add to cart button to new settings
     merchantSettings.settings.modal.addToCartButton.color = newModalCartButtonColor;
     merchantSettings.settings.modal.addToCartButton.hoverColor = newModalCartButtonHoverColor;
     merchantSettings.settings.modal.addToCartButton.txtColor = newModalCartButtonTextColor;
@@ -135,7 +141,6 @@ export default function Settings(props) {
 
   async function handleSaveSettings() {
     const result = await saveSettings();
-    console.log("Result for saving settings: ", result);
   }
 
   return (

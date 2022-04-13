@@ -69,6 +69,7 @@ app.prepare().then(async () => {
 
   server.use(
     createShopifyAuth({
+      accessMode: "offline",
       async afterAuth(ctx) {
         // Access token and shop available in ctx.state.shopify
         const { shop, accessToken, scope } = ctx.state.shopify;
@@ -147,6 +148,7 @@ app.prepare().then(async () => {
     });
     let id = session.id.split("_");
     data.id = id[1];
+    data.token = session.accessToken;
 
     ctx.body = data;
     ctx.status = 200;
