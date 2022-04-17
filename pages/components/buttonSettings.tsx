@@ -16,6 +16,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import StarIcon from "@mui/icons-material/Star";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ColorPicker from "./colorPicker";
+import PositionSelector from "./positonSelector";
 
 type PropsType = {
   newButtonColor: string;
@@ -36,6 +37,10 @@ type PropsType = {
   setNewButtonActiveURL: Function;
   newButtonUnactiveURL: string;
   setNewButtonUnactiveURL: Function;
+  newButtonPosition: string;
+  setNewButtonPosition: Function;
+  settings: Object;
+  setSettings: Function;
 };
 
 const buttonSettings: FunctionComponent<PropsType> = ({
@@ -57,6 +62,10 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   setNewButtonActiveURL,
   newButtonUnactiveURL,
   setNewButtonUnactiveURL,
+  newButtonPosition,
+  setNewButtonPosition,
+  settings,
+  setSettings,
 }) => {
   const [selected, setSelected] = useState([newButtonStdIcon]);
   const [iconText, setIconText] = useState(newButtonText);
@@ -67,7 +76,10 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   }, []);
 
   //init colors
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("Upadated!!!!!!!!!!!!");
+    console.log(settings);
+  }, [settings]);
 
   const handleChoiceChange = useCallback((selections) => {
     setUseIconSelected(selections[0]);
@@ -149,7 +161,7 @@ const buttonSettings: FunctionComponent<PropsType> = ({
                   selected={[useIconSelected]}
                   onChange={handleChoiceChange}
                 />
-                <b>Button text:</b>
+                <b>Button text</b>
                 <TextField
                   label="Button text"
                   type="text"
@@ -160,6 +172,12 @@ const buttonSettings: FunctionComponent<PropsType> = ({
                   autoComplete="off"
                 />
               </FormLayout>
+              {console.log("ander er en steg", settings)}
+              <PositionSelector
+                titel={"Icon position"}
+                pos={newButtonPosition}
+                setPositionFunction={setNewButtonPosition}
+              />
             </div>
           </div>
         </Card>

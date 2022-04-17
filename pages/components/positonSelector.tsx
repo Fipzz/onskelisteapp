@@ -1,31 +1,57 @@
-import React, { FunctionComponent, useCallback } from "react";
-import { TextField } from "@shopify/polaris";
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { ChoiceList } from "@shopify/polaris";
 
 type PropsType = {
   titel: string;
-  text: string;
-  setTextFunction: Function;
+  pos: string;
+  setPositionFunction: Function;
 };
 
 const positonSelector: FunctionComponent<PropsType> = ({
   titel,
-  text,
-  setTextFunction,
+  pos,
+  setPositionFunction,
 }) => {
-  const handleTextChange = useCallback((newValue) => {
-    setTextFunction(newValue);
+  const [selected, setSelected] = useState([pos]);
+  const handleChange = useCallback((value) => {
+    console.log(value);
+    setSelected(value);
+    setPositionFunction(value[0]);
   }, []);
 
+  useEffect(() => {
+    setSelected([pos]);
+  }, [pos]);
+
   return (
-    <div style={{ padding: "1em" }}>
-      <b>{titel}</b>
-      <TextField
-        label="Cart button text"
-        type="text"
-        labelHidden
-        value={text}
-        onChange={handleTextChange}
-        autoComplete="off"
+    <div style={{ paddingTop: "1em" }}>
+      <ChoiceList
+        title={<b>{titel}</b>}
+        choices={[
+          {
+            label: "Top left",
+            value: "0.75rem,auto,auto,0.75rem",
+          },
+          {
+            label: "Top right",
+            value: "0.75rem,0.75rem,auto,auto",
+          },
+          {
+            label: "Bottom left",
+            value: "auto,auto,0.75rem,0.75rem",
+          },
+          {
+            label: "Bottom right",
+            value: "auto,0.75rem,0.75rem,auto",
+          },
+        ]}
+        selected={selected}
+        onChange={handleChange}
       />
     </div>
   );

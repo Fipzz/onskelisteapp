@@ -7,6 +7,7 @@ import React, {
 import { Card, Checkbox } from "@shopify/polaris";
 import ColorPicker from "./colorPicker";
 import SettingsTextField from "./settingsTextField";
+import PositionSelector from "./positonSelector";
 
 type PropsType = {
   newModalToggleText: string;
@@ -31,6 +32,12 @@ type PropsType = {
   setNewModalCartButtonTextColor: Function;
   newModalBackgroundColor: string;
   setNewModalBackgroundColor: Function;
+  newModalTogglePosition: string;
+  setNewModalTogglePosition: Function;
+  newModalToggleBorderColor: string;
+  setNewModalToggleBorderColor: Function;
+  newModalCartButtonBorderColor: string;
+  setNewModalCartButtonBorderColor: Function;
 };
 
 const buttonSettings: FunctionComponent<PropsType> = ({
@@ -56,6 +63,12 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   setNewModalCartButtonText,
   newModalCartButtonTextColor,
   setNewModalCartButtonTextColor,
+  newModalTogglePosition,
+  setNewModalTogglePosition,
+  newModalToggleBorderColor,
+  setNewModalToggleBorderColor,
+  newModalCartButtonBorderColor,
+  setNewModalCartButtonBorderColor,
 }) => {
   const [isModalIcon, setIsModalIcon] = useState(newModalToggleIsIcon);
   const handleIsModalIcon = useCallback((isModalIcon) => {
@@ -108,6 +121,13 @@ const buttonSettings: FunctionComponent<PropsType> = ({
               color={newModalToggleTextColor}
               setColor={setNewModalToggleTextColor}
             />
+            <div style={{ paddingLeft: "1em", paddingBottom: "1em" }}>
+              <PositionSelector
+                titel={"Toggle modal positon"}
+                pos={newModalTogglePosition}
+                setPositionFunction={setNewModalTogglePosition}
+              />
+            </div>
           </div>
         </Card>
       </div>
@@ -134,6 +154,11 @@ const buttonSettings: FunctionComponent<PropsType> = ({
               color={newModalCartButtonTextColor}
               setColor={setNewModalCartButtonTextColor}
             />
+            <ColorPicker
+              titel={"Add to cart border color"}
+              color={newModalCartButtonBorderColor}
+              setColor={setNewModalCartButtonBorderColor}
+            />
           </div>
         </Card>
       </div>
@@ -157,6 +182,11 @@ const buttonSettings: FunctionComponent<PropsType> = ({
               onChange={handleIsModalIcon}
             />
           </div>
+          <ColorPicker
+            titel={"Toggle modal border color"}
+            color={newModalToggleBorderColor}
+            setColor={setNewModalToggleBorderColor}
+          />
         </Card>
       </div>
     </div>

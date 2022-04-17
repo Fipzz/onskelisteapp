@@ -1,41 +1,52 @@
 {
   "settings": {
-    "collection": {
-      "color": "#e80000",
-      "hoverColor": "#7c26ff",
+    "collectionSetting": {
+      "bgColor": "#ffffff",
+      "bgColorActive": "#808080",
+      "txtColor": "#000000",
+      "txtColorActive": "#fff",
       "borderColor": "#000",
-      "txt": "Save me",
-      "txtColor": "#3f5b3f",
+      "txt": "bar min mening..",
       "isIcon": true,
       "isCustom": true,
       "stdIcon": "heart",
-      "iconUnactiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423",
-      "iconActiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-filled.svg?v=1648208423"
+      "iconUnactiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-filled.svg?v=1648208423",
+      "iconActiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423",
+      "position": "auto,0.75rem,0.75rem,auto"
     },
-    "modal": {
-      "bgColor": "#261e86",
+    "modalSetting": {
+      "bgColor": "#ffffff",
       "addToCartButton": {
-        "color": "#00f4ff",
-        "hoverColor": "#a100cc",
-        "txtColor": "#189118",
-        "txt": "hello"
+        "bgColor": "#000",
+        "bgColorActive": "#808080",
+        "txtColor": "#fff",
+        "txtColorActive": "#fff",
+        "borderColor": "#808080",
+        "txt": "Add to cart",
+        "iconUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423",
+        "position": "0.75rem,auto,auto,0.75rem"
       },
       "toggleModalButton": {
-        "color": "#ffd900",
-        "hoverColor": "#c1d2c1",
-        "txtColor": "#31de31",
-        "txt": "Ope123",
+        "bgColor": "#ffffff",
+        "bgColorActive": "#808080",
+        "txtColor": "#000000",
+        "txtColorActive": "#fff",
+        "borderColor": "#000000",
+        "txt": "Dab",
         "isIcon": true,
-        "iconUrl": "please update"
+        "iconUrl": "please update",
+        "position": "0.75rem,auto,auto,0.75rem"
       }
     },
-    "product": {
-      "color": "#fff",
-      "hoverColor": "#7c26ff",
+    "pdpSetting": {
+      "bgColor": "#fff",
+      "bgColorActive": "#808080",
+      "txtColor": "#000",
+      "txtColorActive": "#fff",
       "borderColor": "#000",
       "txt": "Save me",
-      "txtColor": "#000",
       "isCustom": true,
+      "stdIcon": "heart",
       "iconUnactiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-filled.svg?v=1648208423",
       "iconActiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423"
     }

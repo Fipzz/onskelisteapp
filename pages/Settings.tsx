@@ -7,8 +7,7 @@ import * as restAPI from "./actions/restAPI";
 import ModalSettings from "./components/modalSettings";
 
 export default function Settings(props) {
-  const [loadingSettings, setLoadingSettings] = useState(true);
-  // const API_URL = "wishlist-api-shopify.herokuapp.com";
+  //const [loadingSettings, setLoadingSettings] = useState(true);
   const API_URL = "wishlist-api-shopify.herokuapp.com";
   const [merchantSettings, setMerchantSettings] = useState(standardMerchant);
   const [shop, setShop] = useState();
@@ -25,6 +24,9 @@ export default function Settings(props) {
   const [newButtonStdIcon, setNewButtonStdIcon] = useState("");
   const [newButtonActiveURL, setNewButtonActiveURL] = useState("");
   const [newButtonUnactiveURL, setNewButtonUnactiveURL] = useState("");
+  const [newButtonPosition, setNewButtonPosition] = useState(
+    "0.75rem,0.75rem,auto,auto"
+  );
 
   //New variables : Modal
   const [newModalBackgroundColor, setNewModalBackgroundColor] = useState("");
@@ -36,6 +38,12 @@ export default function Settings(props) {
   const [newModalToggleText, setNewModalToggleText] = useState("");
   const [newModalToggleIconURL, setNewModalToggleIconURL] = useState("");
   const [newModalToggleIsIcon, setNewModalToggleIsIcon] = useState(false);
+  const [newModalTogglePosition, setNewModalTogglePosition] = useState(
+    "0.75rem,0.75rem,auto,auto"
+  );
+  const [newModalToggleBorderColor, setNewModalToggleBorderColor] = useState(
+    ""
+  );
 
   //New variables : Modal - Add to Cart
   const [newModalCartButtonColor, setNewModalCartButtonColor] = useState("");
@@ -47,6 +55,10 @@ export default function Settings(props) {
   const [
     newModalCartButtonTextColor,
     setNewModalCartButtonTextColor,
+  ] = useState("");
+  const [
+    newModalCartButtonBorderColor,
+    setNewModalCartButtonBorderColor,
   ] = useState("");
 
   //Loads current settings for merchant
@@ -73,6 +85,7 @@ export default function Settings(props) {
           setNewButtonStdIcon(res.settings.collection.stdIcon);
           setNewButtonActiveURL(res.settings.collection.iconUnactiveUrl);
           setNewButtonUnactiveURL(res.settings.collection.iconActiveUrl);
+          setNewButtonPosition(res.settings.collection.position);
 
           //Modal settings
           setNewModalBackgroundColor(res.settings.modal.bgColor);
@@ -96,6 +109,15 @@ export default function Settings(props) {
           setNewModalCartButtonTextColor(
             res.settings.modal.addToCartButton.txtColor
           );
+          setNewModalToggleBorderColor(
+            res.settings.modal.toggleModalButton.borderColor
+          );
+          setNewModalTogglePosition(
+            res.settings.modal.toggleModalButton.position
+          );
+          setNewModalCartButtonBorderColor(
+            res.settings.modal.toggleModalButton.borderColor
+          );
         });
     });
   }
@@ -118,6 +140,7 @@ export default function Settings(props) {
     merchantSettings.settings.collection.isIcon = newButtonIsIcon;
     merchantSettings.settings.collection.isCustom = newButtonIsCustom;
     merchantSettings.settings.collection.stdIcon = newButtonStdIcon;
+    merchantSettings.settings.collection.position = newButtonPosition;
     //Set modal toggle button to new settings
     merchantSettings.settings.modal.bgColor = newModalBackgroundColor;
     merchantSettings.settings.modal.toggleModalButton.color = newModalToggleColor;
@@ -126,11 +149,15 @@ export default function Settings(props) {
     merchantSettings.settings.modal.toggleModalButton.txt = newModalToggleText;
     merchantSettings.settings.modal.toggleModalButton.iconUrl = newModalToggleIconURL;
     merchantSettings.settings.modal.toggleModalButton.isIcon = newModalToggleIsIcon;
+    merchantSettings.settings.modal.toggleModalButton.borderColor = newModalToggleBorderColor;
+    merchantSettings.settings.modal.toggleModalButton.position = newModalTogglePosition;
+
     //Set add to cart button to new settings
     merchantSettings.settings.modal.addToCartButton.color = newModalCartButtonColor;
     merchantSettings.settings.modal.addToCartButton.hoverColor = newModalCartButtonHoverColor;
     merchantSettings.settings.modal.addToCartButton.txtColor = newModalCartButtonTextColor;
     merchantSettings.settings.modal.addToCartButton.txt = newModalCartButtonText;
+    merchantSettings.settings.modal.addToCartButton.borderColor = newModalCartButtonBorderColor;
 
     // merchantSettings.settings.button.iconActiveUrl
     // merchantSettings.settings.button.iconUnactiveUrl
@@ -165,6 +192,10 @@ export default function Settings(props) {
           setNewButtonActiveURL={setNewButtonActiveURL}
           newButtonUnactiveURL={newButtonUnactiveURL}
           setNewButtonUnactiveURL={setNewButtonUnactiveURL}
+          newButtonPosition={newButtonPosition}
+          setNewButtonPosition={setNewButtonPosition}
+          settings={merchantSettings}
+          setSettings={setMerchantSettings}
         />
         <ModalSettings
           newModalToggleText={newModalToggleText}
@@ -189,6 +220,12 @@ export default function Settings(props) {
           setNewModalCartButtonTextColor={setNewModalCartButtonTextColor}
           newModalBackgroundColor={newModalBackgroundColor}
           setNewModalBackgroundColor={setNewModalBackgroundColor}
+          newModalTogglePosition={newModalTogglePosition}
+          setNewModalTogglePosition={setNewModalTogglePosition}
+          newModalToggleBorderColor={newModalToggleBorderColor}
+          setNewModalToggleBorderColor={setNewModalToggleBorderColor}
+          newModalCartButtonBorderColor={newModalCartButtonBorderColor}
+          setNewModalCartButtonBorderColor={setNewModalCartButtonBorderColor}
         />
       </div>
       <div style={{ padding: "1em" }}>
