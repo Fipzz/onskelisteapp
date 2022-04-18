@@ -7,18 +7,15 @@ import React, {
 import {
   ChoiceList,
   Card,
-  ColorPicker,
   Icon,
   FormLayout,
   TextField,
   Checkbox,
 } from "@shopify/polaris";
-import { StarFilledMinor } from "@shopify/polaris-icons";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import StarIcon from "@mui/icons-material/Star";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import * as colorConverter from "../functions/colorConverter.js";
-import { hsbToHex, rgbToHsb, RGBColor } from "@shopify/polaris";
+import ColorPicker from "./colorPicker";
 
 type PropsType = {
   newButtonColor: string;
@@ -29,9 +26,9 @@ type PropsType = {
   setNewButtonText: Function;
   newButtonTextColor: string;
   setNewButtonTextColor: Function;
-  newButtonIsIcon: string;
+  newButtonIsIcon: boolean;
   setNewButtonIsIcon: Function;
-  newButtonIsCustom: string;
+  newButtonIsCustom: boolean;
   setNewButtonIsCustom: Function;
   newButtonStdIcon: string;
   setNewButtonStdIcon: Function;
@@ -62,25 +59,8 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   setNewButtonUnactiveURL,
 }) => {
   const [selected, setSelected] = useState([newButtonStdIcon]);
-  const [iconColor, setIconColor] = useState({
-    hue: 120,
-    brightness: 1,
-    saturation: 1,
-  });
-  const [hoverColor, setHoverColor] = useState({
-    hue: 120,
-    brightness: 1,
-    saturation: 1,
-  });
-
-  const [textColor, setTextColor] = useState({
-    hue: 120,
-    brightness: 1,
-    saturation: 1,
-  });
-
   const [iconText, setIconText] = useState(newButtonText);
-  const [useIconSelected, setUseIconSelected] = useState("yes");
+  const [useIconSelected, setUseIconSelected] = useState("");
   const handleTextChange = useCallback((newValue) => {
     setIconText(newValue);
     setNewButtonText(newValue);
@@ -91,8 +71,7 @@ const buttonSettings: FunctionComponent<PropsType> = ({
 
   const handleChoiceChange = useCallback((selections) => {
     setUseIconSelected(selections[0]);
-
-    if (selections[0] === "true") {
+    if (selections[0] == "yes") {
       setNewButtonIsIcon(true);
     } else {
       setNewButtonIsIcon(false);
@@ -104,7 +83,7 @@ const buttonSettings: FunctionComponent<PropsType> = ({
     setNewButtonStdIcon(value[0]);
   }, []);
 
-  const [isCustomCheck, setIsCustomCheck] = useState(false);
+  const [isCustomCheck, setIsCustomCheck] = useState(newButtonIsCustom);
   const handleIsCustom = useCallback((isCustomCheck) => {
     setIsCustomCheck(isCustomCheck);
     setNewButtonIsCustom(isCustomCheck);
@@ -113,34 +92,33 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   //Load settings
   useEffect(() => {
     if (newButtonStdIcon !== "") setSelected([newButtonStdIcon]);
-    if (newButtonText === "") setIconText(newButtonText);
-  }, [newButtonStdIcon, newButtonText]);
+    setIconText(newButtonText);
 
-  function buttonIconColorPicker() {
-    setNewButtonColor(hsbToHex(iconColor));
-    return <ColorPicker onChange={setIconColor} color={iconColor} />;
-  }
+    if (newButtonIsIcon) {
+      setUseIconSelected("yes");
+    } else {
+      setUseIconSelected("no");
+    }
 
-  function buttonHoverColorPicker() {
-    setNewButtonHoverColor(hsbToHex(hoverColor));
-    return <ColorPicker onChange={setHoverColor} color={hoverColor} />;
-  }
-  function buttonTextColorPicker() {
-    setNewButtonTextColor(hsbToHex(textColor));
-    return <ColorPicker onChange={setTextColor} color={textColor} />;
-  }
+    setIsCustomCheck(newButtonIsCustom);
+  }, [newButtonStdIcon, newButtonText, newButtonIsCustom, newButtonIsIcon]);
 
   return (
     <div>
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           padding: "1em",
         }}
       >
         <Card>
-          <div style={{ minWidth: "8.1em", padding: "1em" }}>
+          <div
+            style={{
+              minWidth: "8.1em",
+              padding: "1em",
+            }}
+          >
             <ChoiceList
               title={<b>Wishlist Icon</b>}
               choices={[
@@ -160,62 +138,57 @@ const buttonSettings: FunctionComponent<PropsType> = ({
               selected={selected}
               onChange={handleChange}
             />
-            {"Active->"} {newButtonStdIcon}
+            <div style={{ paddingTop: "1em" }}>
+              <FormLayout>
+                <ChoiceList
+                  title={<b>Wishlist button as text?: </b>}
+                  choices={[
+                    { label: "Use Icon", value: "yes" },
+                    { label: "Use Text", value: "no" },
+                  ]}
+                  selected={[useIconSelected]}
+                  onChange={handleChoiceChange}
+                />
+                <b>Button text:</b>
+                <TextField
+                  label="Button text"
+                  type="text"
+                  labelHidden
+                  value={iconText}
+                  disabled={newButtonIsIcon}
+                  onChange={handleTextChange}
+                  autoComplete="off"
+                />
+              </FormLayout>
+            </div>
           </div>
         </Card>
-
-        <Card>
-          Icon color
-          {buttonIconColorPicker()}
-          {newButtonColor}
-          {<br />}
-          {newButtonIsIcon}
-          {newButtonIsCustom}
-          {/* {newButtonActiveURL}
-            {newButtonUnactiveURL} */}
-        </Card>
-
-        <Card>
-          Hover color
-          {buttonHoverColorPicker()}
-          {newButtonHoverColor}
-        </Card>
-        <Card>
-          Text color
-          {buttonTextColorPicker()}
-          {newButtonTextColor}
-        </Card>
-      </div>
-      <div style={{ padding: "1em" }}>
-        <Card>
-          <FormLayout>
-            <ChoiceList
-              title="Add to wishlist button: "
-              choices={[
-                { label: "Use Icon", value: "no" },
-                { label: "Use Text", value: "yes" },
-              ]}
-              selected={[useIconSelected]}
-              onChange={handleChoiceChange}
+        <div style={{ marginLeft: "1em" }}>
+          <Card>
+            <ColorPicker
+              titel={"Icon color"}
+              color={newButtonColor}
+              setColor={setNewButtonColor}
             />
-            <TextField
-              label="Button text"
-              type="text"
-              labelHidden
-              value={iconText}
-              disabled={useIconSelected === "no"}
-              onChange={handleTextChange}
-              autoComplete="off"
+            <ColorPicker
+              titel={"Hover color"}
+              color={newButtonHoverColor}
+              setColor={setNewButtonHoverColor}
             />
-          </FormLayout>
-        </Card>
-        <Card>
-          <Checkbox
-            label="Use custom icon?"
-            checked={isCustomCheck}
-            onChange={handleIsCustom}
-          />
-        </Card>
+            <ColorPicker
+              titel={"Text color"}
+              color={newButtonTextColor}
+              setColor={setNewButtonTextColor}
+            />
+            <div style={{ paddingTop: "2em", padding: "1em" }}>
+              <Checkbox
+                label="Use custom icon?"
+                checked={isCustomCheck}
+                onChange={handleIsCustom}
+              />
+            </div>
+          </Card>
+        </div>
       </div>
     </div>
   );
