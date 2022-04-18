@@ -15,10 +15,12 @@ export default function Settings(props) {
   const [merchantID, setMerchantID] = useState();
 
   //New variables : Wishlist Button
-  const [newButtonColor, setNewButtonColor] = useState("");
-  const [newButtonHoverColor, setNewButtonHoverColor] = useState("");
-  const [newButtonText, setNewButtonText] = useState("");
+  const [newButtonBgColor, setNewButtonBgColor] = useState("");
+  const [newButtonBgColorActive, setNewButtonBgColorActive] = useState("");
   const [newButtonTextColor, setNewButtonTextColor] = useState("");
+  const [newButtonTextColorActive, setNewButtonTextColorActive] = useState("");
+  const [newButtonBorderColor, setNewButtonBorderColor] = useState("");
+  const [newButtonText, setNewButtonText] = useState("");
   const [newButtonIsIcon, setNewButtonIsIcon] = useState();
   const [newButtonIsCustom, setNewButtonIsCustom] = useState();
   const [newButtonStdIcon, setNewButtonStdIcon] = useState("");
@@ -32,9 +34,16 @@ export default function Settings(props) {
   const [newModalBackgroundColor, setNewModalBackgroundColor] = useState("");
 
   //New variables : Modal - Toggle
-  const [newModalToggleColor, setNewModalToggleColor] = useState("");
-  const [newModalToggleHoverColor, setNewModalToggleHoverColor] = useState("");
+  const [newModalToggleBgColor, setNewModalToggleBgColor] = useState("");
+  const [
+    newModalToggleBgActiveColor,
+    setNewModalToggleBgActiveColor,
+  ] = useState("");
   const [newModalToggleTextColor, setNewModalToggleTextColor] = useState("");
+  const [
+    newModalToggleTextColorActive,
+    setNewModalToggleTextColorActive,
+  ] = useState("");
   const [newModalToggleText, setNewModalToggleText] = useState("");
   const [newModalToggleIconURL, setNewModalToggleIconURL] = useState("");
   const [newModalToggleIsIcon, setNewModalToggleIsIcon] = useState(false);
@@ -46,10 +55,12 @@ export default function Settings(props) {
   );
 
   //New variables : Modal - Add to Cart
-  const [newModalCartButtonColor, setNewModalCartButtonColor] = useState("");
+  const [newModalCartButtonBgColor, setNewModalCartButtonBgColor] = useState(
+    ""
+  );
   const [
-    newModalCartButtonHoverColor,
-    setNewModalCartButtonHoverColor,
+    newModalCartButtonBgActiveColor,
+    setNewModalCartButtonBgActiveColor,
   ] = useState("");
   const [newModalCartButtonText, setNewModalCartButtonText] = useState("");
   const [
@@ -57,8 +68,42 @@ export default function Settings(props) {
     setNewModalCartButtonTextColor,
   ] = useState("");
   const [
+    newModalCartButtonTextColorActive,
+    setNewModalCartButtonTextColorActive,
+  ] = useState("");
+  newModalCartButtonTextColorActive;
+  const [
     newModalCartButtonBorderColor,
     setNewModalCartButtonBorderColor,
+  ] = useState("");
+
+  //New variables : Product page - Wishlist button
+  const [
+    newProductPageBackgroundColor,
+    setNewProductPageBackgroundColor,
+  ] = useState("");
+  const [
+    newProductPageBackgroundColorActive,
+    setNewProductPageBackgroundColorActive,
+  ] = useState("");
+  const [newProductPageTextColor, setNewProductPageTextColor] = useState("");
+  const [
+    newProductPageTextColorActive,
+    setNewProductPageTextColorActive,
+  ] = useState("");
+  const [newProductPageBorderColor, setNewProductPageBorderColor] = useState(
+    ""
+  );
+  const [newProductPageText, setNewProductPageText] = useState("");
+  const [newProductPageIsCustom, setNewProductPageIsCustom] = useState();
+  const [newProductPageStdIcon, setNewProductPageStdIcon] = useState("");
+  const [
+    newProductPageIconUnactiveUrl,
+    setNewProductPageIconUnactiveUrl,
+  ] = useState("");
+  const [
+    newProductPageIconActiveUrl,
+    setNewProductPageIconActiveUrl,
   ] = useState("");
 
   //Loads current settings for merchant
@@ -76,10 +121,12 @@ export default function Settings(props) {
 
           //Button settings
           setMerchantSettings(res);
-          setNewButtonColor(res.settings.collection.color);
-          setNewButtonHoverColor(res.settings.collection.hoverColor);
+          setNewButtonBgColor(res.settings.collection.bgColor);
+          setNewButtonBgColorActive(res.settings.collection.bgColorActive);
           setNewButtonText(res.settings.collection.txt);
           setNewButtonTextColor(res.settings.collection.txtColor);
+          setNewButtonTextColorActive(res.settings.collection.txtColorActive);
+          setNewButtonBorderColor(res.settings.collection.borderColor);
           setNewButtonIsIcon(res.settings.collection.isIcon);
           setNewButtonIsCustom(res.settings.collection.isCustom);
           setNewButtonStdIcon(res.settings.collection.stdIcon);
@@ -89,25 +136,38 @@ export default function Settings(props) {
 
           //Modal settings
           setNewModalBackgroundColor(res.settings.modal.bgColor);
-          setNewModalToggleColor(res.settings.modal.toggleModalButton.color);
+          setNewModalToggleBgColor(
+            res.settings.modal.toggleModalButton.bgColor
+          );
+          setNewModalToggleBgActiveColor(
+            res.settings.modal.toggleModalButton.bgColorActive
+          );
           setNewModalToggleIconURL(
             res.settings.modal.toggleModalButton.iconUrl
           );
           setNewModalToggleIsIcon(res.settings.modal.toggleModalButton.isIcon);
-          setNewModalToggleHoverColor(
+          setNewModalToggleBgActiveColor(
             res.settings.modal.toggleModalButton.hoverColor
           );
           setNewModalToggleText(res.settings.modal.toggleModalButton.txt);
           setNewModalToggleTextColor(
             res.settings.modal.toggleModalButton.txtColor
           );
-          setNewModalCartButtonColor(res.settings.modal.addToCartButton.color);
-          setNewModalCartButtonHoverColor(
-            res.settings.modal.addToCartButton.hoverColor
+          setNewModalToggleTextColorActive(
+            res.settings.modal.toggleModalButton.txtColorActive
+          );
+          setNewModalCartButtonBgColor(
+            res.settings.modal.addToCartButton.bgColor
+          );
+          setNewModalCartButtonBgActiveColor(
+            res.settings.modal.addToCartButton.bgColorActive
           );
           setNewModalCartButtonText(res.settings.modal.addToCartButton.txt);
           setNewModalCartButtonTextColor(
             res.settings.modal.addToCartButton.txtColor
+          );
+          setNewModalCartButtonTextColorActive(
+            res.settings.modal.addToCartButton.txtColorActive
           );
           setNewModalToggleBorderColor(
             res.settings.modal.toggleModalButton.borderColor
@@ -118,6 +178,24 @@ export default function Settings(props) {
           setNewModalCartButtonBorderColor(
             res.settings.modal.toggleModalButton.borderColor
           );
+
+          //pdp settings
+          setNewProductPageBackgroundColor(res.settings.pdpSetting.bgColor);
+          setNewProductPageBackgroundColorActive(
+            res.settings.pdpSetting.bgColorActive
+          );
+          setNewProductPageTextColor(res.settings.pdpSetting.txtColor);
+          setNewProductPageTextColorActive(
+            res.settings.pdpSetting.txtColorActive
+          );
+          setNewProductPageBorderColor(res.settings.pdpSetting.borderColor);
+          setNewProductPageText(res.settings.pdpSetting.txt);
+          setNewProductPageIsCustom(res.settings.pdpSetting.isCustom);
+          setNewProductPageStdIcon(res.settings.pdpSetting.stdIcon);
+          setNewProductPageIconUnactiveUrl(
+            res.settings.pdpSetting.iconUnactiveUrl
+          );
+          setNewProductPageIconActiveUrl(res.settings.pdpSetting.iconActiveUrl);
         });
     });
   }
@@ -132,35 +210,51 @@ export default function Settings(props) {
     merchantSettings.websiteURL = shop;
     merchantSettings.token = token;
 
-    //Set collection button to new settings
-    merchantSettings.settings.collection.color = newButtonColor;
-    merchantSettings.settings.collection.hoverColor = newButtonHoverColor;
-    merchantSettings.settings.collection.txt = newButtonText;
-    merchantSettings.settings.collection.txtColor = newButtonTextColor;
-    merchantSettings.settings.collection.isIcon = newButtonIsIcon;
-    merchantSettings.settings.collection.isCustom = newButtonIsCustom;
-    merchantSettings.settings.collection.stdIcon = newButtonStdIcon;
-    merchantSettings.settings.collection.position = newButtonPosition;
+    //Set collection button to new settingss
+    merchantSettings.settings.collectionSetting.bgColor = newButtonBgColor;
+    merchantSettings.settings.collectionSetting.bgColorActive = newButtonBgColorActive;
+    merchantSettings.settings.collectionSetting.txtColor = newButtonTextColor;
+    merchantSettings.settings.collectionSetting.txtColorActive = newButtonTextColorActive;
+    merchantSettings.settings.collectionSetting.borderColor = newButtonBorderColor;
+    merchantSettings.settings.collectionSetting.txt = newButtonText;
+    merchantSettings.settings.collectionSetting.isIcon = newButtonIsIcon;
+    merchantSettings.settings.collectionSetting.isCustom = newButtonIsCustom;
+    merchantSettings.settings.collectionSetting.stdIcon = newButtonStdIcon;
+    merchantSettings.settings.collectionSetting.position = newButtonPosition;
+    //merchantSettings.settings.collectionSetting.iconActiveUrl = newButtonIconActiveUrl;
+    //merchantSettings.settings.collectionSetting.iconUnactiveUrl = newButtonIconUnactiveUrl;
+
     //Set modal toggle button to new settings
-    merchantSettings.settings.modal.bgColor = newModalBackgroundColor;
-    merchantSettings.settings.modal.toggleModalButton.color = newModalToggleColor;
-    merchantSettings.settings.modal.toggleModalButton.hoverColor = newModalToggleHoverColor;
-    merchantSettings.settings.modal.toggleModalButton.txtColor = newModalToggleTextColor;
-    merchantSettings.settings.modal.toggleModalButton.txt = newModalToggleText;
-    merchantSettings.settings.modal.toggleModalButton.iconUrl = newModalToggleIconURL;
-    merchantSettings.settings.modal.toggleModalButton.isIcon = newModalToggleIsIcon;
-    merchantSettings.settings.modal.toggleModalButton.borderColor = newModalToggleBorderColor;
-    merchantSettings.settings.modal.toggleModalButton.position = newModalTogglePosition;
+    merchantSettings.settings.modalSetting.bgColor = newModalBackgroundColor;
+    merchantSettings.settings.modalSetting.toggleModalButton.bgColor = newModalToggleBgColor;
+    merchantSettings.settings.modalSetting.toggleModalButton.bgColorActive = newModalToggleBgActiveColor;
+    merchantSettings.settings.modalSetting.toggleModalButton.txtColor = newModalToggleTextColor;
+    merchantSettings.settings.modalSetting.toggleModalButton.txtColorActive = newModalToggleTextColorActive;
+    merchantSettings.settings.modalSetting.toggleModalButton.borderColor = newModalToggleBorderColor;
+    merchantSettings.settings.modalSetting.toggleModalButton.txt = newModalToggleText;
+    merchantSettings.settings.modalSetting.toggleModalButton.iconUrl = newModalToggleIconURL;
+    merchantSettings.settings.modalSetting.toggleModalButton.isIcon = newModalToggleIsIcon;
+    merchantSettings.settings.modalSetting.toggleModalButton.position = newModalTogglePosition;
 
     //Set add to cart button to new settings
-    merchantSettings.settings.modal.addToCartButton.color = newModalCartButtonColor;
-    merchantSettings.settings.modal.addToCartButton.hoverColor = newModalCartButtonHoverColor;
-    merchantSettings.settings.modal.addToCartButton.txtColor = newModalCartButtonTextColor;
-    merchantSettings.settings.modal.addToCartButton.txt = newModalCartButtonText;
-    merchantSettings.settings.modal.addToCartButton.borderColor = newModalCartButtonBorderColor;
+    merchantSettings.settings.modalSetting.addToCartButton.bgColor = newModalCartButtonBgColor;
+    merchantSettings.settings.modalSetting.addToCartButton.bgColorActive = newModalCartButtonBgActiveColor;
+    merchantSettings.settings.modalSetting.addToCartButton.txtColor = newModalCartButtonTextColor;
+    merchantSettings.settings.modalSetting.addToCartButton.txtColorActive = newModalCartButtonTextColorActive;
+    merchantSettings.settings.modalSetting.addToCartButton.txt = newModalCartButtonText;
+    merchantSettings.settings.modalSetting.addToCartButton.borderColor = newModalCartButtonBorderColor;
 
-    // merchantSettings.settings.button.iconActiveUrl
-    // merchantSettings.settings.button.iconUnactiveUrl
+    //Set pdp add to wishlist button
+    merchantSettings.settings.pdpSetting.bgColor = newProductPageBackgroundColor;
+    merchantSettings.settings.pdpSetting.bgColorActive = newProductPageBackgroundColorActive;
+    merchantSettings.settings.pdpSetting.txtColor = newProductPageTextColor;
+    merchantSettings.settings.pdpSetting.txtColorActive = newProductPageTextColorActive;
+    merchantSettings.settings.pdpSetting.borderColor = newProductPageBorderColor;
+    merchantSettings.settings.pdpSetting.txt = newProductPageText;
+    merchantSettings.settings.pdpSetting.isCustom = newProductPageIsCustom;
+    merchantSettings.settings.pdpSetting.stdIcon = newProductPageStdIcon;
+    merchantSettings.settings.pdpSetting.iconUnactiveUrl = newProductPageIconUnactiveUrl;
+    merchantSettings.settings.pdpSetting.iconActiveUrl = newProductPageIconActiveUrl;
 
     const res = await restAPI.updateMerchantSettings(API_URL, merchantSettings);
     return res;
@@ -174,10 +268,10 @@ export default function Settings(props) {
     <div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <ButtonSettings
-          newButtonColor={newButtonColor}
-          setNewButtonColor={setNewButtonColor}
-          newButtonHoverColor={newButtonHoverColor}
-          setNewButtonHoverColor={setNewButtonHoverColor}
+          newButtonColor={newButtonBgColor}
+          setNewButtonColor={setNewButtonBgColor}
+          newButtonHoverColor={newButtonBgColorActive}
+          setNewButtonHoverColor={setNewButtonBgColorActive}
           newButtonText={newButtonText}
           setNewButtonText={setNewButtonText}
           newButtonTextColor={newButtonTextColor}
@@ -200,20 +294,20 @@ export default function Settings(props) {
         <ModalSettings
           newModalToggleText={newModalToggleText}
           setNewModalToggleText={setNewModalToggleText}
-          newModalToggleColor={newModalToggleColor}
-          setNewModalToggleColor={setNewModalToggleColor}
+          newModalToggleColor={newModalToggleBgColor}
+          setNewModalToggleColor={setNewModalToggleBgColor}
           newModalToggleIconURL={newModalToggleIconURL}
           setNewModalToggleIconURL={setNewModalToggleIconURL}
           newModalToggleIsIcon={newModalToggleIsIcon ? "true" : "false"}
           setNewModalToggleIsIcon={setNewModalToggleIsIcon}
-          newModalToggleHoverColor={newModalToggleHoverColor}
-          setNewModalToggleHoverColor={setNewModalToggleHoverColor}
+          newModalToggleHoverColor={newModalToggleBgActiveColor}
+          setNewModalToggleHoverColor={setNewModalToggleBgActiveColor}
           newModalToggleTextColor={newModalToggleTextColor}
           setNewModalToggleTextColor={setNewModalToggleTextColor}
-          newModalCartButtonColor={newModalCartButtonColor}
-          setNewModalCartButtonColor={setNewModalCartButtonColor}
-          newModalCartButtonHoverColor={newModalCartButtonHoverColor}
-          setNewModalCartButtonHoverColor={setNewModalCartButtonHoverColor}
+          newModalCartButtonColor={newModalCartButtonBgColor}
+          setNewModalCartButtonColor={setNewModalCartButtonBgColor}
+          newModalCartButtonHoverColor={newModalCartButtonBgActiveColor}
+          setNewModalCartButtonHoverColor={setNewModalCartButtonBgActiveColor}
           newModalCartButtonText={newModalCartButtonText}
           setNewModalCartButtonText={setNewModalCartButtonText}
           newModalCartButtonTextColor={newModalCartButtonTextColor}
