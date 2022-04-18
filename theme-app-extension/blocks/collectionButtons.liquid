@@ -1,5 +1,5 @@
 {%- capture productVars -%}[{%- for product in collection.products -%}{"productID":{{ product.id }},"variantID":{%- if product.available -%}{{ product.selected_or_first_available_variant.id }}{%- else -%}null{%- endif -%}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]{%- endcapture -%}
-{% capture buttonSettings %}{"useIcon":{%- if block.settings.icon_image != nil or block.settings.icon_svg != empty -%}true{%- else -%}false{%- endif -%},"iconUnactiveUrl":{%- if block.settings.icon_svg == "" -%}"{{ block.settings.icon_image | image_url }}"{%- else -%}"{{ block.settings.icon_svg }}"{%- endif -%},"iconActiveUrl":{%- if block.settings.icon_svg_active == "" -%}"{{ block.settings.icon_image_active | image_url }}"{%- else -%}"{{ block.settings.icon_svg_active }}"{%- endif -%}}{% endcapture %}
+{%- capture buttonSettings -%}{"useEditorSettings":{{ block.settings.editor_settings }},"isIcon":{%- if block.settings.icon_image != nil or block.settings.icon_svg != empty -%}true{%- else -%}false{%- endif -%},"iconUnactiveUrl":{%- if block.settings.icon_svg == "" -%}"{{ block.settings.icon_image | image_url }}"{%- else -%}"{{ block.settings.icon_svg }}"{%- endif -%},"iconActiveUrl":{%- if block.settings.icon_svg_active == "" -%}"{{ block.settings.icon_image_active | image_url }}"{%- else -%}"{{ block.settings.icon_svg_active }}"{%- endif -%}}{%- endcapture -%}
 <div class="wishlist-data" data-product-params='{{ productVars }}' data-button-settings='{{ buttonSettings }}'></div>
 
 {% schema %}
@@ -9,6 +9,12 @@
         "javascript": "app.collection.min.js",
         "templates": ["collection"],
         "settings": [
+            {
+                "type": "checkbox",
+                "id": "editor_settings",
+                "label": "Use editor settings",
+                "default": false
+            },
             {
                 "type": "text",
                 "id": "icon_svg",
