@@ -29,7 +29,7 @@ const positonSelector: FunctionComponent<PropsType> = ({
   }, [pos]);
 
   return (
-    <div style={{ paddingTop: "1em" }}>
+    <div style={{ minWidth: "8em" }}>
       <ChoiceList
         title={<b>{titel}</b>}
         choices={[

@@ -17,16 +17,18 @@ const settingsTextField: FunctionComponent<PropsType> = ({
   }, []);
 
   return (
-    <div style={{ padding: "1em" }}>
+    <div style={{}}>
       <b>{titel}</b>
-      <TextField
-        label="Cart button text"
-        type="text"
-        labelHidden
-        value={text}
-        onChange={handleTextChange}
-        autoComplete="off"
-      />
+      <div style={{ paddingTop: "1em" }}>
+        <TextField
+          label="Cart button text"
+          type="text"
+          labelHidden
+          value={text}
+          onChange={handleTextChange}
+          autoComplete="off"
+        />
+      </div>
     </div>
   );
 };

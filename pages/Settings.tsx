@@ -266,7 +266,7 @@ export default function Settings(props) {
 
   return (
     <div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ display: "flex", flexDirection: "column" }}>
         <ButtonSettings
           newButtonColor={newButtonBgColor}
           setNewButtonColor={setNewButtonBgColor}
