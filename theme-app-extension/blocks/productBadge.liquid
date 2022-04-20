@@ -1,0 +1,41 @@
+{%- capture productVars -%}
+{
+    "productID": {{ product.id }},
+    "variantID": {%- if product.available -%}{{ product.selected_or_first_available_variant.id }}{%- else -%}null{%- endif -%}
+}
+{%- endcapture -%}
+
+<div class="wishlist-data" data-product-params='{{ productVars }}'></div>
+
+{% schema %}
+    {
+        "name": "Collection buttons",
+        "target": "section",
+        "javascript": "app.pdp.min.js",
+        "templates": ["product"],
+        "settings": [
+            {
+                "type": "text",
+                "id": "icon_svg",
+                "label": "Icon as SVG",
+                "info": "Copy and paste url from SVG-file in /admin/settings/files"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_image",
+                "label": "Icon image"
+            },
+            {
+                "type": "text",
+                "id": "icon_svg_active",
+                "label": "Active icon as SVG",
+                "info": "Copy and paste url from SVG-file in /admin/settings/files"
+            },
+            {
+                "type": "image_picker",
+                "id": "icon_image_active",
+                "label": "Active icon image"
+            }
+        ]
+    }
+{% endschema %}
