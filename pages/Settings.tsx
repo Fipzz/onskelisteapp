@@ -5,6 +5,7 @@ import standardMerchant from "./assets/json/standardMerchant.json";
 import { Button } from "@shopify/polaris";
 import * as restAPI from "./actions/restAPI";
 import ModalSettings from "./components/modalSettings";
+import ProductPageSettings from "./components/productPageSettings";
 
 export default function Settings(props) {
   //const [loadingSettings, setLoadingSettings] = useState(true);
@@ -227,10 +228,10 @@ export default function Settings(props) {
     merchantSettings.settings.collectionSetting.isCustom = newButtonIsCustom;
     merchantSettings.settings.collectionSetting.stdIcon = newButtonStdIcon;
     merchantSettings.settings.collectionSetting.position = newButtonPosition;
-    //merchantSettings.settings.collectionSetting.iconActiveUrl = newButtonIconActiveUrl;
-    //merchantSettings.settings.collectionSetting.iconUnactiveUrl = newButtonIconUnactiveUrl;
+    merchantSettings.settings.collectionSetting.iconActiveUrl = newButtonActiveURL;
+    merchantSettings.settings.collectionSetting.iconUnactiveUrl = newButtonUnactiveURL;
 
-    //Set modal toggle button to new settings
+    //Set modal toggle button to new settingss
     merchantSettings.settings.modalSetting.bgColor = newModalBackgroundColor;
     merchantSettings.settings.modalSetting.toggleModalButton.bgColor = newModalToggleBgColor;
     merchantSettings.settings.modalSetting.toggleModalButton.bgColorActive = newModalToggleBgActiveColor;
@@ -326,6 +327,33 @@ export default function Settings(props) {
           setNewModalToggleBorderColor={setNewModalToggleBorderColor}
           newModalCartButtonBorderColor={newModalCartButtonBorderColor}
           setNewModalCartButtonBorderColor={setNewModalCartButtonBorderColor}
+        />
+
+        <ProductPageSettings
+          newProductPageBackgroundColor={newProductPageBackgroundColor}
+          setNewProductPageBackgroundColor={setNewProductPageBackgroundColor}
+          newProductPageBackgroundColorActive={
+            newProductPageBackgroundColorActive
+          }
+          setNewProductPageBackgroundColorActive={
+            setNewProductPageBackgroundColorActive
+          }
+          newProductPageTextColor={newProductPageTextColor}
+          setNewProductPageTextColor={setNewProductPageTextColor}
+          newProductPageTextColorActive={newProductPageTextColorActive}
+          setNewProductPageTextColorActive={setNewProductPageTextColorActive}
+          newProductPageBorderColor={newProductPageBorderColor}
+          setNewProductPageBorderColor={setNewProductPageBorderColor}
+          newProductPageText={newProductPageText}
+          setNewProductPageText={setNewProductPageText}
+          newProductPageIsCustom={newProductPageIsCustom}
+          setNewProductPageIsCustom={setNewProductPageIsCustom}
+          newProductPageStdIcon={newProductPageStdIcon}
+          setNewProductPageStdIcon={setNewProductPageStdIcon}
+          newProductPageIconUnactiveUrl={newProductPageIconUnactiveUrl}
+          setNewProductPageIconUnactiveUrl={setNewProductPageIconUnactiveUrl}
+          newProductPageIconActiveUrl={newProductPageIconActiveUrl}
+          setNewProductPageIconActiveUrl={setNewProductPageIconActiveUrl}
         />
       </div>
       <div style={{ padding: "1em" }}>

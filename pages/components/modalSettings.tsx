@@ -208,11 +208,13 @@ const buttonSettings: FunctionComponent<PropsType> = ({
                 color={newModalCartButtonColor}
                 setColor={setNewModalCartButtonColor}
               />
-              <ColorPicker
-                titel={"Add to cart hover color"}
-                color={newModalCartButtonHoverColor}
-                setColor={setNewModalCartButtonHoverColor}
-              />{" "}
+              <div style={{ paddingTop: "1em " }}>
+                <ColorPicker
+                  titel={"Add to cart hover color"}
+                  color={newModalCartButtonHoverColor}
+                  setColor={setNewModalCartButtonHoverColor}
+                />
+              </div>
             </div>
             <div
               style={{
@@ -227,11 +229,13 @@ const buttonSettings: FunctionComponent<PropsType> = ({
                 color={newModalCartButtonTextColor}
                 setColor={setNewModalCartButtonTextColor}
               />
-              <ColorPicker
-                titel={"Add to cart border color"}
-                color={newModalCartButtonBorderColor}
-                setColor={setNewModalCartButtonBorderColor}
-              />
+              <div style={{ paddingTop: "1em " }}>
+                <ColorPicker
+                  titel={"Add to cart border color"}
+                  color={newModalCartButtonBorderColor}
+                  setColor={setNewModalCartButtonBorderColor}
+                />
+              </div>
             </div>
           </div>
         </Card>

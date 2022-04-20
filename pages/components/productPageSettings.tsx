@@ -18,6 +18,8 @@ import StarIcon from "@mui/icons-material/Star";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ColorPicker from "./colorPicker";
 import PositionSelector from "./positonSelector";
+import SettingsTextField from "./settingsTextField";
+import Base64 from "../assets/json/mediaAsBase64.json";
 
 type PropsType = {
   newProductPageBackgroundColor: string;
@@ -32,7 +34,7 @@ type PropsType = {
   setNewProductPageBorderColor: Function;
   newProductPageText: string;
   setNewProductPageText: Function;
-  newProductPageIsCustom: string;
+  newProductPageIsCustom: boolean;
   setNewProductPageIsCustom: Function;
   newProductPageStdIcon: string;
   setNewProductPageStdIcon: Function;
@@ -64,9 +66,42 @@ const productPageSettings: FunctionComponent<PropsType> = ({
   newProductPageIconActiveUrl,
   setNewProductPageIconActiveUrl,
 }) => {
+  const [selected, setSelected] = useState([newProductPageStdIcon]);
+
+  const handleChange = useCallback((value) => {
+    setSelected(value);
+    setNewProductPageStdIcon(value[0]);
+
+    if (value == "heart") {
+      console.log("Selected: " + value);
+      setNewProductPageIconUnactiveUrl(Base64.heartEmpty);
+      setNewProductPageIconActiveUrl(Base64.heartFilled);
+    } else if (value == "star") {
+      console.log("Selected: " + value);
+      setNewProductPageIconUnactiveUrl(Base64.starEmpty);
+      setNewProductPageIconActiveUrl(Base64.starFilled);
+    } else if (value == "bookmark") {
+      console.log("Selected: " + value);
+      setNewProductPageIconUnactiveUrl(Base64.bookmarkEmpty);
+      setNewProductPageIconActiveUrl(Base64.bookmarkFilled);
+    }
+  }, []);
+
+  const [isCustomCheck, setIsCustomCheck] = useState(newProductPageIsCustom);
+  const handleIsCustom = useCallback((isCustomCheck) => {
+    setIsCustomCheck(isCustomCheck);
+    setNewProductPageIsCustom(isCustomCheck);
+  }, []);
+
+  useEffect(() => {
+    if (newProductPageStdIcon !== "") setSelected([newProductPageStdIcon]);
+
+    setIsCustomCheck(newProductPageIsCustom);
+  }, [newProductPageStdIcon, newProductPageIsCustom]);
+
   return (
     <div>
-      {/* <div
+      <div
         style={{
           padding: "1em",
           width: "100%",
@@ -75,7 +110,7 @@ const productPageSettings: FunctionComponent<PropsType> = ({
         <Card>
           <div style={{ paddingTop: "1em", paddingLeft: "1em" }}>
             <Heading>
-              <b>Collection page</b>
+              <b>Product page add to wishlist button</b>
             </Heading>
           </div>
           <div
@@ -91,18 +126,33 @@ const productPageSettings: FunctionComponent<PropsType> = ({
               }}
             >
               <ChoiceList
-                title={<b>Wishlist Icon</b>}
+                title={<b>Button Icon</b>}
                 choices={[
                   {
-                    label: <FavoriteIcon />,
+                    label: (
+                      <img
+                        src={Base64.heartEmpty}
+                        style={{ height: "3rem", width: "3rem" }}
+                      />
+                    ),
                     value: "heart",
                   },
                   {
-                    label: <StarIcon />,
+                    label: (
+                      <img
+                        src={Base64.starEmpty}
+                        style={{ height: "3rem", width: "3rem" }}
+                      />
+                    ),
                     value: "star",
                   },
                   {
-                    label: <BookmarkIcon />,
+                    label: (
+                      <img
+                        src={Base64.bookmarkEmpty}
+                        style={{ height: "3rem", width: "3rem" }}
+                      />
+                    ),
                     value: "bookmark",
                   },
                 ]}
@@ -110,11 +160,6 @@ const productPageSettings: FunctionComponent<PropsType> = ({
                 onChange={handleChange}
               />
             </div>
-            <PositionSelector
-              titel={"Icon position"}
-              pos={newButtonPosition}
-              setPositionFunction={setNewButtonPosition}
-            />
             <div
               style={{
                 display: "flex",
@@ -123,15 +168,15 @@ const productPageSettings: FunctionComponent<PropsType> = ({
               }}
             >
               <ColorPicker
-                titel={"Icon unactive color"}
-                color={newButtonColor}
-                setColor={setNewButtonColor}
+                titel={"Button Unactive color"}
+                color={newProductPageBackgroundColor}
+                setColor={setNewProductPageBackgroundColor}
               />
               <div style={{ paddingTop: "1em " }}>
                 <ColorPicker
-                  titel={"Icon active color"}
-                  color={newButtonHoverColor}
-                  setColor={setNewButtonHoverColor}
+                  titel={"Button active color"}
+                  color={newProductPageBackgroundColorActive}
+                  setColor={setNewProductPageBackgroundColorActive}
                 />
               </div>
             </div>
@@ -143,10 +188,31 @@ const productPageSettings: FunctionComponent<PropsType> = ({
               }}
             >
               <ColorPicker
-                titel={"Text color"}
-                color={newButtonTextColor}
-                setColor={setNewButtonTextColor}
+                titel={"Text unactive color"}
+                color={newProductPageTextColor}
+                setColor={setNewProductPageTextColor}
               />
+              <div style={{ paddingTop: "1em " }}>
+                <ColorPicker
+                  titel={"Text active color"}
+                  color={newProductPageTextColorActive}
+                  setColor={setNewProductPageTextColorActive}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "1em",
+              }}
+            >
+              <ColorPicker
+                titel={"Border color"}
+                color={newProductPageBorderColor}
+                setColor={setNewProductPageBorderColor}
+              />
+
               <div style={{ padding: "1em", paddingTop: "2.8em" }}>
                 <Checkbox
                   label={<b>Use custom icon</b>}
@@ -162,43 +228,16 @@ const productPageSettings: FunctionComponent<PropsType> = ({
               paddingBottom: "1em",
             }}
           >
-            <FormLayout>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                }}
-              >
-                <div style={{ minWidth: "10em" }}>
-                  <ChoiceList
-                    title={<b>Use text button </b>}
-                    choices={[
-                      { label: "Use Icon", value: "yes" },
-                      { label: "Use Text", value: "no" },
-                    ]}
-                    selected={[useIconSelected]}
-                    onChange={handleChoiceChange}
-                  />
-                </div>
-                <div>
-                  <b>Button text</b>
-                  <div style={{ paddingTop: "1em" }}>
-                    <TextField
-                      label="Button text"
-                      type="text"
-                      labelHidden
-                      value={iconText}
-                      disabled={newButtonIsIcon}
-                      onChange={handleTextChange}
-                      autoComplete="off"
-                    />
-                  </div>
-                </div>
-              </div>
-            </FormLayout>
+            <div style={{ maxWidth: "15em" }}>
+              <SettingsTextField
+                titel={"Button text"}
+                text={newProductPageText}
+                setTextFunction={setNewProductPageText}
+              />
+            </div>
           </div>
         </Card>
-      </div> */}
+      </div>
     </div>
   );
 };

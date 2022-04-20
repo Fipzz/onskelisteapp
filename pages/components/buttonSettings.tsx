@@ -18,6 +18,7 @@ import StarIcon from "@mui/icons-material/Star";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ColorPicker from "./colorPicker";
 import PositionSelector from "./positonSelector";
+import Base64 from "../assets/json/mediaAsBase64.json";
 
 type PropsType = {
   newButtonColor: string;
@@ -93,6 +94,20 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   const handleChange = useCallback((value) => {
     setSelected(value);
     setNewButtonStdIcon(value[0]);
+
+    if (value == "heart") {
+      console.log("Selected: " + value);
+      setNewButtonUnactiveURL(Base64.heartEmpty);
+      setNewButtonActiveURL(Base64.heartFilled);
+    } else if (value == "star") {
+      console.log("Selected: " + value);
+      setNewButtonUnactiveURL(Base64.starEmpty);
+      setNewButtonActiveURL(Base64.starFilled);
+    } else if (value == "bookmark") {
+      console.log("Selected: " + value);
+      setNewButtonUnactiveURL(Base64.bookmarkEmpty);
+      setNewButtonActiveURL(Base64.bookmarkFilled);
+    }
   }, []);
 
   const [isCustomCheck, setIsCustomCheck] = useState(newButtonIsCustom);
@@ -126,7 +141,7 @@ const buttonSettings: FunctionComponent<PropsType> = ({
         <Card>
           <div style={{ paddingTop: "1em", paddingLeft: "1em" }}>
             <Heading>
-              <b>Collection page</b>
+              <b>Collection page add to wishlist button</b>
             </Heading>
           </div>
           <div
@@ -139,21 +154,37 @@ const buttonSettings: FunctionComponent<PropsType> = ({
             <div
               style={{
                 minWidth: "10em",
+                alignItems: "center",
               }}
             >
               <ChoiceList
                 title={<b>Wishlist Icon</b>}
                 choices={[
                   {
-                    label: <FavoriteIcon />,
+                    label: (
+                      <img
+                        src={Base64.heartEmpty}
+                        style={{ height: "3rem", width: "3rem" }}
+                      />
+                    ),
                     value: "heart",
                   },
                   {
-                    label: <StarIcon />,
+                    label: (
+                      <img
+                        src={Base64.starEmpty}
+                        style={{ height: "3rem", width: "3rem" }}
+                      />
+                    ),
                     value: "star",
                   },
                   {
-                    label: <BookmarkIcon />,
+                    label: (
+                      <img
+                        src={Base64.bookmarkEmpty}
+                        style={{ height: "3rem", width: "3rem" }}
+                      />
+                    ),
                     value: "bookmark",
                   },
                 ]}
