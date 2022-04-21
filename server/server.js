@@ -54,13 +54,6 @@ Shopify.Context.initialize({
 // Storing the currently active shops in memory will force them to re-login when your server restarts. You should
 // persist this object in your app.
 const ACTIVE_SHOPIFY_SHOPS = {};
-console.log("Active shops: ", ACTIVE_SHOPIFY_SHOPS);
-
-// Shopify.Webhooks.Registry.addHandler("APP_UNINSTALLED", {
-//   path: "/webhooks",
-//   webhookHandler: async (topic, shop, body) =>
-//     delete ACTIVE_SHOPIFY_SHOPS[shop],
-// });
 
 app.prepare().then(async () => {
   const server = new Koa();
