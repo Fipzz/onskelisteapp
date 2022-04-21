@@ -7,15 +7,11 @@ import React, {
 import {
   ChoiceList,
   Card,
-  Icon,
   FormLayout,
   TextField,
   Checkbox,
   Heading,
 } from "@shopify/polaris";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import StarIcon from "@mui/icons-material/Star";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ColorPicker from "./colorPicker";
 import PositionSelector from "./positonSelector";
 import Base64 from "../assets/json/mediaAsBase64.json";
@@ -43,6 +39,8 @@ type PropsType = {
   setNewButtonPosition: Function;
   newButtonBorderColor: string;
   setNewButtonBorderColor: Function;
+  newButtonIconColor: string;
+  setNewButtonIconColor: Function;
 };
 
 const buttonSettings: FunctionComponent<PropsType> = ({
@@ -68,6 +66,8 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   setNewButtonPosition,
   newButtonBorderColor,
   setNewButtonBorderColor,
+  newButtonIconColor,
+  setNewButtonIconColor,
 }) => {
   const [selected, setSelected] = useState([newButtonStdIcon]);
   const [iconText, setIconText] = useState(newButtonText);
@@ -231,6 +231,19 @@ const buttonSettings: FunctionComponent<PropsType> = ({
                   setColor={setNewButtonBorderColor}
                 />
               </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "1em",
+              }}
+            >
+              <ColorPicker
+                titel={"Icon color"}
+                color={newButtonIconColor}
+                setColor={setNewButtonIconColor}
+              />
             </div>
           </div>
           <div

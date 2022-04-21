@@ -4,20 +4,9 @@ import React, {
   useEffect,
   useState,
 } from "react";
-import {
-  ChoiceList,
-  Card,
-  Icon,
-  FormLayout,
-  TextField,
-  Checkbox,
-  Heading,
-} from "@shopify/polaris";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import StarIcon from "@mui/icons-material/Star";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
+import { ChoiceList, Card, Checkbox, Heading } from "@shopify/polaris";
+
 import ColorPicker from "./colorPicker";
-import PositionSelector from "./positonSelector";
 import SettingsTextField from "./settingsTextField";
 import Base64 from "../assets/json/mediaAsBase64.json";
 
@@ -42,6 +31,8 @@ type PropsType = {
   setNewProductPageIconUnactiveUrl: Function;
   newProductPageIconActiveUrl: string;
   setNewProductPageIconActiveUrl: Function;
+  newProductPageIconColor: string;
+  setNewProductPageIconColor: Function;
 };
 
 const productPageSettings: FunctionComponent<PropsType> = ({
@@ -65,6 +56,8 @@ const productPageSettings: FunctionComponent<PropsType> = ({
   setNewProductPageIconUnactiveUrl,
   newProductPageIconActiveUrl,
   setNewProductPageIconActiveUrl,
+  newProductPageIconColor,
+  setNewProductPageIconColor,
 }) => {
   const [selected, setSelected] = useState([newProductPageStdIcon]);
 
@@ -213,27 +206,53 @@ const productPageSettings: FunctionComponent<PropsType> = ({
                 setColor={setNewProductPageBorderColor}
               />
 
-              <div style={{ padding: "1em", paddingTop: "2.8em" }}>
+              <div style={{ paddingTop: "1em" }}>
+                <ColorPicker
+                  titel={"Icon color"}
+                  color={newProductPageIconColor}
+                  setColor={setNewProductPageIconColor}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "1em",
+              }}
+            ></div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              paddingLeft: "1em ",
+              paddingBottom: "1em",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+              }}
+            >
+              <SettingsTextField
+                titel={"Button text"}
+                text={newProductPageText}
+                setTextFunction={setNewProductPageText}
+              />
+              <div
+                style={{
+                  paddingLeft: "1em",
+                  paddingTop: "2.7em",
+                }}
+              >
                 <Checkbox
                   label={<b>Use custom icon</b>}
                   checked={isCustomCheck}
                   onChange={handleIsCustom}
                 />
               </div>
-            </div>
-          </div>
-          <div
-            style={{
-              paddingLeft: "1em ",
-              paddingBottom: "1em",
-            }}
-          >
-            <div style={{ maxWidth: "15em" }}>
-              <SettingsTextField
-                titel={"Button text"}
-                text={newProductPageText}
-                setTextFunction={setNewProductPageText}
-              />
             </div>
           </div>
         </Card>

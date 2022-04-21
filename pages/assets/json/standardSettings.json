@@ -10,6 +10,7 @@
       "isIcon": true,
       "isCustom": true,
       "stdIcon": "heart",
+      "iconColor": "#000",
       "iconUnactiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-filled.svg?v=1648208423",
       "iconActiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423",
       "position": "auto,0.75rem,0.75rem,auto"
@@ -47,6 +48,7 @@
       "txt": "Save me",
       "isCustom": true,
       "stdIcon": "heart",
+      "iconColor": "#000",
       "iconUnactiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-filled.svg?v=1648208423",
       "iconActiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423"
     }

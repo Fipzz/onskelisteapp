@@ -30,6 +30,7 @@ export default function Settings(props) {
   const [newButtonPosition, setNewButtonPosition] = useState(
     "0.75rem,0.75rem,auto,auto"
   );
+  const [newButtonIconColor, setNewButtonIconColor] = useState("");
 
   //New variables : Modal
   const [newModalBackgroundColor, setNewModalBackgroundColor] = useState("");
@@ -105,6 +106,7 @@ export default function Settings(props) {
     newProductPageIconActiveUrl,
     setNewProductPageIconActiveUrl,
   ] = useState("");
+  const [newProductPageIconColor, setNewProductPageIconColor] = useState("");
 
   //Loads current settings for merchant
   function initMerchant() {
@@ -139,6 +141,7 @@ export default function Settings(props) {
             res.settings.collectionSetting.iconUnactiveUrl
           );
           setNewButtonPosition(res.settings.collectionSetting.position);
+          setNewButtonIconColor(res.settings.collectionSetting.iconColor);
 
           //Modal settings
           setNewModalBackgroundColor(res.settings.modalSetting.bgColor);
@@ -205,6 +208,7 @@ export default function Settings(props) {
             res.settings.pdpSetting.iconUnactiveUrl
           );
           setNewProductPageIconActiveUrl(res.settings.pdpSetting.iconActiveUrl);
+          setNewProductPageIconColor(res.settings.pdpSetting.iconColor);
         });
     });
   }
@@ -232,6 +236,7 @@ export default function Settings(props) {
     merchantSettings.settings.collectionSetting.position = newButtonPosition;
     merchantSettings.settings.collectionSetting.iconActiveUrl = newButtonActiveURL;
     merchantSettings.settings.collectionSetting.iconUnactiveUrl = newButtonUnactiveURL;
+    merchantSettings.settings.collectionSetting.iconColor = newButtonIconColor;
 
     //Set modal toggle button to new settingss
     merchantSettings.settings.modalSetting.bgColor = newModalBackgroundColor;
@@ -264,6 +269,7 @@ export default function Settings(props) {
     merchantSettings.settings.pdpSetting.stdIcon = newProductPageStdIcon;
     merchantSettings.settings.pdpSetting.iconUnactiveUrl = newProductPageIconUnactiveUrl;
     merchantSettings.settings.pdpSetting.iconActiveUrl = newProductPageIconActiveUrl;
+    merchantSettings.settings.pdpSetting.iconColor = newProductPageIconColor;
 
     const res = await restAPI.updateMerchantSettings(API_URL, merchantSettings);
     return res;
@@ -299,6 +305,8 @@ export default function Settings(props) {
           setNewButtonPosition={setNewButtonPosition}
           newButtonBorderColor={newButtonBorderColor}
           setNewButtonBorderColor={setNewButtonBorderColor}
+          newButtonIconColor={newButtonIconColor}
+          setNewButtonIconColor={setNewButtonIconColor}
         />
         <ModalSettings
           newModalToggleText={newModalToggleText}
@@ -356,6 +364,8 @@ export default function Settings(props) {
           setNewProductPageIconUnactiveUrl={setNewProductPageIconUnactiveUrl}
           newProductPageIconActiveUrl={newProductPageIconActiveUrl}
           setNewProductPageIconActiveUrl={setNewProductPageIconActiveUrl}
+          newProductPageIconColor={newProductPageIconColor}
+          setNewProductPageIconColor={setNewProductPageIconColor}
         />
       </div>
       <div style={{ padding: "1em" }}>
