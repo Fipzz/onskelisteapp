@@ -41,8 +41,8 @@ type PropsType = {
   setNewButtonUnactiveURL: Function;
   newButtonPosition: string;
   setNewButtonPosition: Function;
-  settings: Object;
-  setSettings: Function;
+  newButtonBorderColor: string;
+  setNewButtonBorderColor: Function;
 };
 
 const buttonSettings: FunctionComponent<PropsType> = ({
@@ -66,8 +66,8 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   setNewButtonUnactiveURL,
   newButtonPosition,
   setNewButtonPosition,
-  settings,
-  setSettings,
+  newButtonBorderColor,
+  setNewButtonBorderColor,
 }) => {
   const [selected, setSelected] = useState([newButtonStdIcon]);
   const [iconText, setIconText] = useState(newButtonText);
@@ -76,11 +76,6 @@ const buttonSettings: FunctionComponent<PropsType> = ({
     setIconText(newValue);
     setNewButtonText(newValue);
   }, []);
-
-  //init colors
-  useEffect(() => {
-    console.log(settings);
-  }, [settings]);
 
   const handleChoiceChange = useCallback((selections) => {
     setUseIconSelected(selections[0]);
@@ -229,11 +224,11 @@ const buttonSettings: FunctionComponent<PropsType> = ({
                 color={newButtonTextColor}
                 setColor={setNewButtonTextColor}
               />
-              <div style={{ padding: "1em", paddingTop: "2.8em" }}>
-                <Checkbox
-                  label={<b>Use custom icon</b>}
-                  checked={isCustomCheck}
-                  onChange={handleIsCustom}
+              <div style={{ paddingTop: "1em " }}>
+                <ColorPicker
+                  titel={"Border color"}
+                  color={newButtonBorderColor}
+                  setColor={setNewButtonBorderColor}
                 />
               </div>
             </div>
@@ -275,6 +270,13 @@ const buttonSettings: FunctionComponent<PropsType> = ({
                       autoComplete="off"
                     />
                   </div>
+                </div>
+                <div style={{ paddingTop: "3.6rem", paddingLeft: "3rem" }}>
+                  <Checkbox
+                    label={<b>Use custom icon</b>}
+                    checked={isCustomCheck}
+                    onChange={handleIsCustom}
+                  />
                 </div>
               </div>
             </FormLayout>

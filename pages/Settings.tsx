@@ -134,8 +134,10 @@ export default function Settings(props) {
           setNewButtonIsIcon(res.settings.collectionSetting.isIcon);
           setNewButtonIsCustom(res.settings.collectionSetting.isCustom);
           setNewButtonStdIcon(res.settings.collectionSetting.stdIcon);
-          setNewButtonActiveURL(res.settings.collectionSetting.iconUnactiveUrl);
-          setNewButtonUnactiveURL(res.settings.collectionSetting.iconActiveUrl);
+          setNewButtonActiveURL(res.settings.collectionSetting.iconActiveUrl);
+          setNewButtonUnactiveURL(
+            res.settings.collectionSetting.iconUnactiveUrl
+          );
           setNewButtonPosition(res.settings.collectionSetting.position);
 
           //Modal settings
@@ -295,8 +297,8 @@ export default function Settings(props) {
           setNewButtonUnactiveURL={setNewButtonUnactiveURL}
           newButtonPosition={newButtonPosition}
           setNewButtonPosition={setNewButtonPosition}
-          settings={merchantSettings}
-          setSettings={setMerchantSettings}
+          newButtonBorderColor={newButtonBorderColor}
+          setNewButtonBorderColor={setNewButtonBorderColor}
         />
         <ModalSettings
           newModalToggleText={newModalToggleText}

@@ -151,7 +151,7 @@ const buttonSettings: FunctionComponent<PropsType> = ({
             />
             <div style={{ paddingTop: "1em " }}>
               <ColorPicker
-                titel={"Wishlist Modal Background Color"}
+                titel={"Modal Background Color"}
                 color={newModalBackgroundColor}
                 setColor={setNewModalBackgroundColor}
               />
