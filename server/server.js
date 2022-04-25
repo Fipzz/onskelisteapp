@@ -146,44 +146,44 @@ app.prepare().then(async () => {
     ctx.status = 200;
   });
 
-  router.get("/getTheme", async (ctx) => {
-    const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res);
-    // Create a new client for the specified shop.
-    console.log(
-      "Getting current theme with session: " +
-        session.shop +
-        " And accessToken: " +
-        session.accessToken
-    );
+  // router.get("/getTheme", async (ctx) => {
+  //   const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res);
+  //   // Create a new client for the specified shop.
+  //   console.log(
+  //     "Getting current theme with session: " +
+  //       session.shop +
+  //       " And accessToken: " +
+  //       session.accessToken
+  //   );
 
-    console.log("TEST: ", process.env.NODE_ENV); // WORKS
+  //   console.log("TEST: ", process.env.NODE_ENV); // WORKS
 
-    //Get list of themes for shop
-    const client = new Shopify.Clients.Rest(session.shop, session.accessToken);
-    const data = await client.get({
-      path: "themes",
-    });
-    //Find main theme for shop
-    let themeID;
+  //   //Get list of themes for shop
+  //   const client = new Shopify.Clients.Rest(session.shop, session.accessToken);
+  //   const data = await client.get({
+  //     path: "themes",
+  //   });
+  //   //Find main theme for shop
+  //   let themeID;
 
-    data.body.themes.forEach((theme) => {
-      if ((theme.role = "main")) {
-        themeID = theme.id;
-      }
-    });
+  //   data.body.themes.forEach((theme) => {
+  //     if ((theme.role = "main")) {
+  //       themeID = theme.id;
+  //     }
+  //   });
 
-    const ress = await client.get({
-      path: "themes/" + themeID + "/assets",
-      query: { "asset%5Bkey%5D": "assets/ajax-loader.gif" },
-    });
+  //   const ress = await client.get({
+  //     path: "themes/" + themeID + "/assets",
+  //     query: { "asset%5Bkey%5D": "assets/ajax-loader.gif" },
+  //   });
 
-    const result = await client.get({
-      path: "themes/" + themeID + "/assets",
-    });
-    console.log(ress);
-    ctx.body = ress;
-    ctx.status = 200;
-  });
+  //   const result = await client.get({
+  //     path: "themes/" + themeID + "/assets",
+  //   });
+  //   console.log(ress);
+  //   ctx.body = ress;
+  //   ctx.status = 200;
+  // });
 
   router.get("(/_next/static/.*)", handleRequest); // Static content is clear
   router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
