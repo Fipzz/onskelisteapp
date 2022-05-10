@@ -41,6 +41,7 @@ const buttonSettings: FunctionComponent<PropsType> = ({
 
   const handleTextFieldChange = useCallback((value) => {
     setColorAsText(value);
+    setColor(value);
   }, []);
 
   const togglePopoverActive = useCallback(
@@ -74,7 +75,7 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   );
 
   return (
-    <div style={{ padding: "1em" }}>
+    <div style={{}}>
       <TextField
         label={<b>{titel}</b>}
         type="text"

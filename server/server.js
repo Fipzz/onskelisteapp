@@ -147,6 +147,7 @@ app.prepare().then(async () => {
     });
     let id = session.id.split("_");
     data.id = id[1];
+    data.token = session.accessToken;
 
     ctx.body = data;
     ctx.status = 200;

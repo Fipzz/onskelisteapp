@@ -1,34 +1,59 @@
 {
-  "merchantID": "",
-  "websiteURL": "",
+  "merchantID": "55376314521",
+  "websiteURL": "grafikr-test-store.myshopify.com",
+  "token": "",
   "settings": {
-    "button": {
-      "color": "#000",
-      "hovorColor": "#000",
-      "txt": "Save",
-      "txtColor": "#000",
+    "collectionSetting": {
+      "bgColor": "#ffffff",
+      "bgColorActive": "#808080",
+      "txtColor": "#000000",
+      "txtColorActive": "#fff",
+      "borderColor": "#000",
+      "txt": "bar min mening..",
       "isIcon": true,
-      "isCustom": false,
+      "isCustom": true,
       "stdIcon": "heart",
-      "iconUnactiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423",
-      "iconActiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-filled.svg?v=1648208423"
+      "iconColor": "#000",
+      "iconUnactiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-filled.svg?v=1648208423",
+      "iconActiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423",
+      "position": "auto,0.75rem,0.75rem,auto"
     },
-    "modal": {
-      "bgColor": "#000",
+    "modalSetting": {
+      "bgColor": "#ffffff",
       "addToCartButton": {
-        "color": "#000",
-        "hoverColor": "#000",
-        "txtColor": "#000",
-        "txt": "Add to cart"
+        "bgColor": "#000",
+        "bgColorActive": "#808080",
+        "txtColor": "#fff",
+        "txtColorActive": "#fff",
+        "borderColor": "#808080",
+        "txt": "Add to cart",
+        "iconUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423",
+        "position": "0.75rem,auto,auto,0.75rem"
       },
       "toggleModalButton": {
-        "color": "#000",
-        "hoverColor": "#000",
-        "txtColor": "#000",
-        "txt": "Open wishlist",
+        "bgColor": "#ffffff",
+        "bgColorActive": "#808080",
+        "txtColor": "#000000",
+        "txtColorActive": "#fff",
+        "borderColor": "#000000",
+        "txt": "Dab",
+        "isIcon": true,
         "iconUrl": "please update",
-        "isIcon": true
+        "position": "0.75rem,auto,auto,0.75rem"
       }
+    },
+    "pdpSetting": {
+      "bgColor": "#fff",
+      "bgColorActive": "#808080",
+      "txtColor": "#000",
+      "txtColorActive": "#fff",
+      "borderColor": "#000",
+      "txt": "Save me",
+      "isCustom": true,
+      "stdIcon": "heart",
+      "iconColor": "#000",
+      "iconUnactiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-filled.svg?v=1648208423",
+      "iconActiveUrl": "https://cdn.shopify.com/s/files/1/0406/0417/2441/files/heart-unfilled.svg?v=1648208423"
     }
   }
 }

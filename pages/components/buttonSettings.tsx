@@ -7,15 +7,14 @@ import React, {
 import {
   ChoiceList,
   Card,
-  Icon,
   FormLayout,
   TextField,
   Checkbox,
+  Heading,
 } from "@shopify/polaris";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import StarIcon from "@mui/icons-material/Star";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ColorPicker from "./colorPicker";
+import PositionSelector from "./positonSelector";
+import Base64 from "../assets/json/mediaAsBase64.json";
 
 type PropsType = {
   newButtonColor: string;
@@ -36,6 +35,12 @@ type PropsType = {
   setNewButtonActiveURL: Function;
   newButtonUnactiveURL: string;
   setNewButtonUnactiveURL: Function;
+  newButtonPosition: string;
+  setNewButtonPosition: Function;
+  newButtonBorderColor: string;
+  setNewButtonBorderColor: Function;
+  newButtonIconColor: string;
+  setNewButtonIconColor: Function;
 };
 
 const buttonSettings: FunctionComponent<PropsType> = ({
@@ -57,6 +62,12 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   setNewButtonActiveURL,
   newButtonUnactiveURL,
   setNewButtonUnactiveURL,
+  newButtonPosition,
+  setNewButtonPosition,
+  newButtonBorderColor,
+  setNewButtonBorderColor,
+  newButtonIconColor,
+  setNewButtonIconColor,
 }) => {
   const [selected, setSelected] = useState([newButtonStdIcon]);
   const [iconText, setIconText] = useState(newButtonText);
@@ -65,9 +76,6 @@ const buttonSettings: FunctionComponent<PropsType> = ({
     setIconText(newValue);
     setNewButtonText(newValue);
   }, []);
-
-  //init colors
-  useEffect(() => {}, []);
 
   const handleChoiceChange = useCallback((selections) => {
     setUseIconSelected(selections[0]);
@@ -81,6 +89,20 @@ const buttonSettings: FunctionComponent<PropsType> = ({
   const handleChange = useCallback((value) => {
     setSelected(value);
     setNewButtonStdIcon(value[0]);
+
+    if (value == "heart") {
+      console.log("Selected: " + value);
+      setNewButtonUnactiveURL(Base64.heartEmpty);
+      setNewButtonActiveURL(Base64.heartFilled);
+    } else if (value == "star") {
+      console.log("Selected: " + value);
+      setNewButtonUnactiveURL(Base64.starEmpty);
+      setNewButtonActiveURL(Base64.starFilled);
+    } else if (value == "bookmark") {
+      console.log("Selected: " + value);
+      setNewButtonUnactiveURL(Base64.bookmarkEmpty);
+      setNewButtonActiveURL(Base64.bookmarkFilled);
+    }
   }, []);
 
   const [isCustomCheck, setIsCustomCheck] = useState(newButtonIsCustom);
@@ -107,88 +129,172 @@ const buttonSettings: FunctionComponent<PropsType> = ({
     <div>
       <div
         style={{
-          display: "flex",
-          justifyContent: "flex-start",
           padding: "1em",
+          width: "100%",
         }}
       >
         <Card>
+          <div style={{ paddingTop: "1em", paddingLeft: "1em" }}>
+            <Heading>
+              <b>Collection page add to wishlist button</b>
+            </Heading>
+          </div>
           <div
             style={{
-              minWidth: "8.1em",
               padding: "1em",
+              display: "flex",
+              flexDirection: "row",
             }}
           >
-            <ChoiceList
-              title={<b>Wishlist Icon</b>}
-              choices={[
-                {
-                  label: <FavoriteIcon />,
-                  value: "heart",
-                },
-                {
-                  label: <StarIcon />,
-                  value: "star",
-                },
-                {
-                  label: <BookmarkIcon />,
-                  value: "bookmark",
-                },
-              ]}
-              selected={selected}
-              onChange={handleChange}
-            />
-            <div style={{ paddingTop: "1em" }}>
-              <FormLayout>
-                <ChoiceList
-                  title={<b>Wishlist button as text?: </b>}
-                  choices={[
-                    { label: "Use Icon", value: "yes" },
-                    { label: "Use Text", value: "no" },
-                  ]}
-                  selected={[useIconSelected]}
-                  onChange={handleChoiceChange}
-                />
-                <b>Button text:</b>
-                <TextField
-                  label="Button text"
-                  type="text"
-                  labelHidden
-                  value={iconText}
-                  disabled={newButtonIsIcon}
-                  onChange={handleTextChange}
-                  autoComplete="off"
-                />
-              </FormLayout>
-            </div>
-          </div>
-        </Card>
-        <div style={{ marginLeft: "1em" }}>
-          <Card>
-            <ColorPicker
-              titel={"Icon color"}
-              color={newButtonColor}
-              setColor={setNewButtonColor}
-            />
-            <ColorPicker
-              titel={"Hover color"}
-              color={newButtonHoverColor}
-              setColor={setNewButtonHoverColor}
-            />
-            <ColorPicker
-              titel={"Text color"}
-              color={newButtonTextColor}
-              setColor={setNewButtonTextColor}
-            />
-            <div style={{ paddingTop: "2em", padding: "1em" }}>
-              <Checkbox
-                label="Use custom icon?"
-                checked={isCustomCheck}
-                onChange={handleIsCustom}
+            <div
+              style={{
+                minWidth: "10em",
+                alignItems: "center",
+              }}
+            >
+              <ChoiceList
+                title={<b>Wishlist Icon</b>}
+                choices={[
+                  {
+                    label: (
+                      <img
+                        src={Base64.heartEmpty}
+                        style={{ height: "3rem", width: "3rem" }}
+                      />
+                    ),
+                    value: "heart",
+                  },
+                  {
+                    label: (
+                      <img
+                        src={Base64.starEmpty}
+                        style={{ height: "3rem", width: "3rem" }}
+                      />
+                    ),
+                    value: "star",
+                  },
+                  {
+                    label: (
+                      <img
+                        src={Base64.bookmarkEmpty}
+                        style={{ height: "3rem", width: "3rem" }}
+                      />
+                    ),
+                    value: "bookmark",
+                  },
+                ]}
+                selected={selected}
+                onChange={handleChange}
               />
             </div>
-          </Card>
-        </div>
+            <PositionSelector
+              titel={"Icon position"}
+              pos={newButtonPosition}
+              setPositionFunction={setNewButtonPosition}
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "1em",
+              }}
+            >
+              <ColorPicker
+                titel={"Icon unactive color"}
+                color={newButtonColor}
+                setColor={setNewButtonColor}
+              />
+              <div style={{ paddingTop: "1em " }}>
+                <ColorPicker
+                  titel={"Icon active color"}
+                  color={newButtonHoverColor}
+                  setColor={setNewButtonHoverColor}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "1em",
+              }}
+            >
+              <ColorPicker
+                titel={"Text color"}
+                color={newButtonTextColor}
+                setColor={setNewButtonTextColor}
+              />
+              <div style={{ paddingTop: "1em " }}>
+                <ColorPicker
+                  titel={"Border color"}
+                  color={newButtonBorderColor}
+                  setColor={setNewButtonBorderColor}
+                />
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                paddingLeft: "1em",
+              }}
+            >
+              <ColorPicker
+                titel={"Icon color"}
+                color={newButtonIconColor}
+                setColor={setNewButtonIconColor}
+              />
+            </div>
+          </div>
+          <div
+            style={{
+              paddingLeft: "1em ",
+              paddingBottom: "1em",
+            }}
+          >
+            <FormLayout>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <div style={{ minWidth: "10em" }}>
+                  <ChoiceList
+                    title={<b>Use text button </b>}
+                    choices={[
+                      { label: "Use Icon", value: "yes" },
+                      { label: "Use Text", value: "no" },
+                    ]}
+                    selected={[useIconSelected]}
+                    onChange={handleChoiceChange}
+                  />
+                </div>
+                <div>
+                  <b>Button text</b>
+                  <div style={{ paddingTop: "1em" }}>
+                    <TextField
+                      label="Button text"
+                      type="text"
+                      labelHidden
+                      value={iconText}
+                      disabled={newButtonIsIcon}
+                      onChange={handleTextChange}
+                      autoComplete="off"
+                    />
+                  </div>
+                </div>
+                <div style={{ paddingTop: "3.6rem", paddingLeft: "3rem" }}>
+                  <Checkbox
+                    label={<b>Use custom icon</b>}
+                    checked={isCustomCheck}
+                    onChange={handleIsCustom}
+                  />
+                </div>
+              </div>
+            </FormLayout>
+          </div>
+        </Card>
       </div>
     </div>
   );

@@ -21,12 +21,15 @@ export const updateMerchantSettings = (url, query) => {
 };
 
 export const getMerchantSettings = (baseURL, merchantURL) => {
-  return fetch(`https://${baseURL}/app-settings/${merchantURL}`, {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-    },
-  })
+  return fetch(
+    `https://${baseURL}/app-settings/all?websiteURL=${merchantURL}`,
+    {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    }
+  )
     .then((res) => {
       return res.json();
     })
@@ -62,18 +65,18 @@ export const createMerchant = (merchantID, websiteURL, settings) => {
     .catch((error) => console.warn(error));
 };
 
-export const validateMerchant = (merchantURL) => {
-  return fetch(`https://${restAPI}/app-settings/${merchantURL}`, {
-    method: "GET",
-    headers: {
-      "content-type": "application/json",
-    },
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .then((responseData) => {
-      return responseData;
-    })
-    .catch((error) => console.warn(error));
-};
+// export const validateMerchant = (merchantURL) => {
+//   return fetch(`https://${restAPI}/app-settings/${merchantURL}`, {
+//     method: "GET",
+//     headers: {
+//       "content-type": "application/json",
+//     },
+//   })
+//     .then((res) => {
+//       return res.json();
+//     })
+//     .then((responseData) => {
+//       return responseData;
+//     })
+//     .catch((error) => console.warn(error));
+// };
