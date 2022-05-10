@@ -9,28 +9,8 @@ import Router from "koa-router";
 import restAPI, { createMerchant } from "./../pages/actions/restAPI.js";
 import standardSettings from "./../pages/assets/json/standardSettings.json";
 
-const cors = require("cors");
 require("dotenv").config();
-
-import mongoose from "mongoose";
 const sessionStorage = require("./../utils/sessionStorage.js");
-
-const mongoUrl = process.env.MONGO_URL;
-
-mongoose.connect(
-  mongoUrl,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  (err) => {
-    if (err) {
-      console.log("--> There was an error connecting to MongoDB:", err.message);
-    } else {
-      console.log("--> Connected to MongoDB");
-    }
-  }
-);
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
@@ -62,6 +42,8 @@ app.prepare().then(async () => {
 
   server.use(
     createShopifyAuth({
+      accessmode: "offline",
+      prefix: "/install",
       async afterAuth(ctx) {
         // Access token and shop available in ctx.state.shopify
         const { shop, accessToken, scope } = ctx.state.shopify;
@@ -71,7 +53,7 @@ app.prepare().then(async () => {
         let id = ctx.state.shopify.id.split("_");
 
         createMerchant(id[1], shop, standardSettings).then((res) => {
-          console.log(res);
+          //console.log(res);
         });
 
         const response = await Shopify.Webhooks.Registry.register({
@@ -145,6 +127,8 @@ app.prepare().then(async () => {
     ctx.body = data;
     ctx.status = 200;
   });
+
+  //MAKE SHOP ID AND SHOP NAME SAME SOMEHOW1
 
   // router.get("/getTheme", async (ctx) => {
   //   const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res);
