@@ -79,9 +79,9 @@ export const createMerchant = (merchantID, websiteURL, settings) => {
 
 export const StoreSession = (id, websiteURL, session) => {
   let query = standardSession;
-  let newID = id.split("_");
+  // let newID = id.split("_");
 
-  query.id = newID[0];
+  query.id = id;
   query.websiteURL = websiteURL;
   query.session = JSON.parse(session);
 
@@ -109,9 +109,9 @@ export const StoreSession = (id, websiteURL, session) => {
 };
 
 export const LoadSession = async (id) => {
-  let newID = id.split("_");
+  // let newID = id.split("_");
 
-  var result = await fetch(`https://${restAPI}/session?id=${newID[0]}`, {
+  var result = await fetch(`https://${restAPI}/session?id=${id}`, {
     method: "GET",
     headers: {
       "content-type": "application/json",
@@ -137,7 +137,7 @@ export const LoadSession = async (id) => {
 
 export const DeleteSession = (id) => {
   let newID = id.split("_");
-  return fetch(`https://${restAPI}/session?id=${newID[0]}`, {
+  return fetch(`https://${restAPI}/session?id=${id}`, {
     method: "DELETE",
     headers: {
       "content-type": "application/json",
