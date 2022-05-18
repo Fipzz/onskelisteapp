@@ -156,19 +156,3 @@ export const DeleteSession = (id) => {
       console.log("ERROR DELETING SESSION");
     });
 };
-
-// export const validateMerchant = (merchantURL) => {
-//   return fetch(`https://${restAPI}/app-settings/${merchantURL}`, {
-//     method: "GET",
-//     headers: {
-//       "content-type": "application/json",
-//     },
-//   })
-//     .then((res) => {
-//       return res.json();
-//     })
-//     .then((responseData) => {
-//       return responseData;
-//     })
-//     .catch((error) => console.warn(error));
-// };

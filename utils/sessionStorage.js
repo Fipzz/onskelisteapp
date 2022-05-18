@@ -35,10 +35,12 @@ const storeCallback = async (session) => {
       );
       return res;
     } else if (!session.accessToken && currentSession.accessToken) {
-      console.log(
-        "Trying to override access token with session that doesnt have access token !!! ABORT"
+      var res = await StoreSession(
+        session.id,
+        session.shop,
+        JSON.stringify(session)
       );
-      return true;
+      return res;
     }
     //console.log("went here 4");
     return true;
