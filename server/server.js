@@ -6,14 +6,14 @@ import Shopify, { ApiVersion, DataType } from "@shopify/shopify-api";
 import Koa from "koa";
 import next from "next";
 import Router from "koa-router";
-import restAPI, { createMerchant } from "./../pages/actions/restAPI.js";
+import { createMerchant } from "./../pages/actions/restAPI.js";
 import standardSettings from "./../pages/assets/json/standardSettings.json";
 
 require("dotenv").config();
 const sessionStorage = require("./../utils/sessionStorage.js");
 
 dotenv.config();
-const port = parseInt(process.env.PORT, 10) || 8081;
+const port = parseInt(processS.env.PORT, 10) || 8081;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({
   dev,
@@ -100,7 +100,11 @@ app.prepare().then(async () => {
   );
 
   router.get("/products", async (ctx) => {
-    const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res);
+    const session = await Shopify.Utils.loadCurrentSession(
+      ctx.req,
+      ctx.res,
+      false
+    );
     // Create a new client for the specified shop.
     const client = new Shopify.Clients.Rest(session.shop, session.accessToken);
     // Use `client.get` to request the specified Shopify REST API endpoint, in this case `products`.
@@ -113,7 +117,11 @@ app.prepare().then(async () => {
   });
 
   router.get("/shop", async (ctx) => {
-    const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res);
+    const session = await Shopify.Utils.loadCurrentSession(
+      ctx.req,
+      ctx.res,
+      false
+    );
     // Create a new client for the specified shop.
     const client = new Shopify.Clients.Rest(session.shop, session.accessToken);
     const data = await client.get({
@@ -126,47 +134,6 @@ app.prepare().then(async () => {
     ctx.body = data;
     ctx.status = 200;
   });
-
-  //MAKE SHOP ID AND SHOP NAME SAME SOMEHOW1
-
-  // router.get("/getTheme", async (ctx) => {
-  //   const session = await Shopify.Utils.loadCurrentSession(ctx.req, ctx.res);
-  //   // Create a new client for the specified shop.
-  //   console.log(
-  //     "Getting current theme with session: " +
-  //       session.shop +
-  //       " And accessToken: " +
-  //       session.accessToken
-  //   );
-
-  //   console.log("TEST: ", process.env.NODE_ENV); // WORKS
-
-  //   //Get list of themes for shop
-  //   const client = new Shopify.Clients.Rest(session.shop, session.accessToken);
-  //   const data = await client.get({
-  //     path: "themes",
-  //   });
-  //   //Find main theme for shop
-  //   let themeID;
-
-  //   data.body.themes.forEach((theme) => {
-  //     if ((theme.role = "main")) {
-  //       themeID = theme.id;
-  //     }
-  //   });
-
-  //   const ress = await client.get({
-  //     path: "themes/" + themeID + "/assets",
-  //     query: { "asset%5Bkey%5D": "assets/ajax-loader.gif" },
-  //   });
-
-  //   const result = await client.get({
-  //     path: "themes/" + themeID + "/assets",
-  //   });
-  //   console.log(ress);
-  //   ctx.body = ress;
-  //   ctx.status = 200;
-  // });
 
   router.get("(/_next/static/.*)", handleRequest); // Static content is clear
   router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
