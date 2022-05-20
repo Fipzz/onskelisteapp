@@ -13,7 +13,7 @@ require("dotenv").config();
 const sessionStorage = require("./../utils/sessionStorage.js");
 
 dotenv.config();
-const port = parseInt(processS.env.PORT, 10) || 8081;
+const port = parseInt(process.env.PORT, 10) || 8081;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({
   dev,
