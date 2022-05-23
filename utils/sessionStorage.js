@@ -35,12 +35,8 @@ const storeCallback = async (session) => {
       );
       return res;
     } else if (!session.accessToken && currentSession.accessToken) {
-      var res = await StoreSession(
-        session.id,
-        session.shop,
-        JSON.stringify(session)
-      );
-      return res;
+      console.log("trying to override with no token");
+      return true;
     }
     //console.log("went here 4");
     return true;
