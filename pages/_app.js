@@ -41,15 +41,14 @@ function MyProvider(props) {
     },
   });
 
-  const axios_instance = axios.create();
-  // Intercept all requests on this Axios instance
-  axios_instance.interceptors.request.use(function (config) {
-    return getSessionToken(app) // requires a Shopify App Bridge instance
-      .then((token) => {
-        // Append your request headers with an authenticated token
-        config.headers["Authorization"] = `Bearer ${token}`;
-        return config;
-      });
+  // Opsnappe alle kald med denne Axios instans
+  const axiosInstance = axios.create();
+  axiosInstance.interceptors.request.use(function (config) {
+    return getSessionToken(app).then((token) => {
+      // Set token i header for hvert klad
+      config.headers["Authorization"] = `Bearer ${token}`;
+      return config;
+    });
   });
 
   const Component = props.Component;

@@ -66,15 +66,12 @@ const productPageSettings: FunctionComponent<PropsType> = ({
     setNewProductPageStdIcon(value[0]);
 
     if (value == "heart") {
-      console.log("Selected: " + value);
       setNewProductPageIconUnactiveUrl(Base64.heartEmpty);
       setNewProductPageIconActiveUrl(Base64.heartFilled);
     } else if (value == "star") {
-      console.log("Selected: " + value);
       setNewProductPageIconUnactiveUrl(Base64.starEmpty);
       setNewProductPageIconActiveUrl(Base64.starFilled);
     } else if (value == "bookmark") {
-      console.log("Selected: " + value);
       setNewProductPageIconUnactiveUrl(Base64.bookmarkEmpty);
       setNewProductPageIconActiveUrl(Base64.bookmarkFilled);
     }
