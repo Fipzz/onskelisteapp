@@ -55,7 +55,7 @@ function MyProvider(props) {
 
   return (
     <ApolloProvider client={client}>
-      <Component {...props} axios_instance={axios_instance} />
+      <Component {...props} axiosInstance={axiosInstance} />
     </ApolloProvider>
   );
 }
