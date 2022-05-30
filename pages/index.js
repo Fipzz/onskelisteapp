@@ -1,20 +1,12 @@
-import { Heading, Page, TextField } from "@shopify/polaris";
+import { Heading, Page, DisplayText } from "@shopify/polaris";
 
 function Index(props) {
-  async function getProducts() {
-    const res = await props.axios_instance.get("/products");
-    return res;
-  }
-
-  async function handleClick() {
-    const result = await getProducts();
-    console.log(result);
-  }
-
   return (
     <Page>
-      <Heading>Shopify app with Node and React </Heading>
-      <input value="Update Pages" type="submit" onClick={handleClick}></input>
+      <Heading>Velkommen til ønskeliste appen!!</Heading>
+      <DisplayText size="medium">
+        For at se eller ændre indstillinger, gå til Settings
+      </DisplayText>
     </Page>
   );
 }

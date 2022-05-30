@@ -51,9 +51,7 @@ app.prepare().then(async () => {
 
         let id = ctx.state.shopify.id.split("_");
 
-        createMerchant(id[1], shop, standardSettings).then((res) => {
-          //console.log(res);
-        });
+        createMerchant(id[1], shop, standardSettings);
 
         const response = await Shopify.Webhooks.Registry.register({
           shop,
@@ -130,7 +128,6 @@ app.prepare().then(async () => {
     let id = session.id.split("_");
     data.id = id[1];
     data.token = session.accessToken;
-
     ctx.body = data;
     ctx.status = 200;
   });

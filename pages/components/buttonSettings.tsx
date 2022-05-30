@@ -91,15 +91,12 @@ const buttonSettings: FunctionComponent<PropsType> = ({
     setNewButtonStdIcon(value[0]);
 
     if (value == "heart") {
-      console.log("Selected: " + value);
       setNewButtonUnactiveURL(Base64.heartEmpty);
       setNewButtonActiveURL(Base64.heartFilled);
     } else if (value == "star") {
-      console.log("Selected: " + value);
       setNewButtonUnactiveURL(Base64.starEmpty);
       setNewButtonActiveURL(Base64.starFilled);
     } else if (value == "bookmark") {
-      console.log("Selected: " + value);
       setNewButtonUnactiveURL(Base64.bookmarkEmpty);
       setNewButtonActiveURL(Base64.bookmarkFilled);
     }

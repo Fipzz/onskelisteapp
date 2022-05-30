@@ -8,7 +8,6 @@ import { Card, Checkbox, Heading } from "@shopify/polaris";
 import ColorPicker from "./colorPicker";
 import SettingsTextField from "./settingsTextField";
 import PositionSelector from "./positonSelector";
-import { ContactsOutlined } from "@mui/icons-material";
 
 type PropsType = {
   newModalToggleText: string;

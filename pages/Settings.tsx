@@ -110,16 +110,14 @@ export default function Settings(props) {
 
   //Loads current settings for merchant
   function initMerchant() {
-    props.axios_instance.get("/shop").then((res) => {
+    props.axiosInstance.get("/shop").then((res) => {
       setShop(res.data.body.shop.domain);
       setMerchantID(res.data.id);
       setToken(res.data.token);
-      console.log("token to update settings - ", res.data.token);
-      console.log("Merchant fetch shop: ", res);
       restAPI
         .getMerchantSettings(API_URL, res.data.body.shop.domain)
         .then((res) => {
-          console.log("Initialize merchant settings -> ", res);
+          //console.log("Initialize merchant settings -> ", res);
 
           //Button settings
           setMerchantSettings(res);

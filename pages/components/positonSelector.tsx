@@ -19,7 +19,6 @@ const positonSelector: FunctionComponent<PropsType> = ({
 }) => {
   const [selected, setSelected] = useState([pos]);
   const handleChange = useCallback((value) => {
-    console.log(value);
     setSelected(value);
     setPositionFunction(value[0]);
   }, []);
